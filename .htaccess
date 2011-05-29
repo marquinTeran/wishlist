@@ -1,0 +1,5 @@
+RewriteEngine on
+
+# Default CI redirect
+RewriteCond $1 !^(index\.php|images|serve|user_guide)
+RewriteRule ^(.*)$ /index.php/$1 [L]
