@@ -1,1 +1,1 @@
-<li class="wishlist-item"><?=$wishlist_item->getName()?> <?=anchor("wishlists/remove-item/{$wishlist_item->getId()}", '[x]')?></li>
+<li class="wishlist-item"><?=$wishlist_item->getName()?> <?=anchor("wishlists/remove-item/{$wishlist_item->getId()}", '[x]', 'class="remove-item"')?></li>

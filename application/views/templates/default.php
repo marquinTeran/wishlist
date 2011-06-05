@@ -22,6 +22,10 @@
 			<?=$navigation_menu?>
 		</div>
 
+        <div id="account-menu">
+            <?=$account_menu?>
+        </div>
+
 		<?php if ($this->session->flashdata('status')): ?>
 		<div id="status">
 			<?=$this->session->flashdata('status')?>

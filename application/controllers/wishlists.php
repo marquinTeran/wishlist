@@ -169,6 +169,16 @@ class Wishlists extends IW_Controller {
             permission_error();
         }
 
+        $this->em->remove($wishlist_item);
+        $this->em->flush();
+
+        if (IS_AJAX)
+        {
+            echo json_encode(array(
+                'status' => 'success'
+            ));
+        }
+
     }
 
 }

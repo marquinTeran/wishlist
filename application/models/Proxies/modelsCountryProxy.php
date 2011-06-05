@@ -39,6 +39,12 @@ class modelsCountryProxy extends \models\Country implements \Doctrine\ORM\Proxy\
         return parent::getName();
     }
 
+    public function toArray()
+    {
+        $this->_load();
+        return parent::toArray();
+    }
+
     public function __call($method, $args)
     {
         $this->_load();

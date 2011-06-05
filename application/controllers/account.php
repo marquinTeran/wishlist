@@ -122,7 +122,7 @@ class Account extends IW_Controller {
 			return TRUE;
 		}
 
-		$this->form_validation->set_message('_check_username', 'That username is already in use.');
+		$this->form_validation->set_message('_unique_username', 'That username is already in use.');
 		return FALSE;
 	}
 
@@ -145,7 +145,7 @@ class Account extends IW_Controller {
 			return TRUE;
 		}
 
-		$this->form_validation->set_message('_check_email', 'That email is already in use. ' . anchor('user/forgot-password', 'Reset Password'));
+		$this->form_validation->set_message('_unique_email', 'That email is already in use.');
 		return FALSE;
 	}
 }
