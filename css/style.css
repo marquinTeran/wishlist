@@ -58,3 +58,18 @@ hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 
 
 input, select { vertical-align:middle; }
 /* END RESET STYLES */
+
+/* HTML Elements */
+body {
+    margin: 20px auto;
+    width: 80%;
+}
+
+h1, h2, h3, h4 { font-family: Helvetica, Verdana, Arial, sans-serif; }
+h1 { font-size: 2em; }
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.1em; }
+
+ul, ol { list-style-position: inside; }
+/* End HTML Elements */

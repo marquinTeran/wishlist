@@ -12,6 +12,20 @@ $config['template_default_layout'] = 'templates/default';
 
 /*
 |--------------------------------------------------------------------------
+| Script Root Directory
+|--------------------------------------------------------------------------
+|
+| Added to the beginning of script URIs, i.e. with a script_root value of
+| '/includes/js/', addScript('myscript.js') would add the script '/includes/js/myscript.js'
+|
+| Setting prepend_base_url to TRUE will prepend base_url() to your script_root setting
+|
+*/
+$config['script_root'] = 'serve?f=';
+$config['prepend_base_url'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
 | Automatically Trim Title
 |--------------------------------------------------------------------------
 |

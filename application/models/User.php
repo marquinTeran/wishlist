@@ -135,8 +135,8 @@ class User extends BaseModel
 	 */
 	public static function encryptPassword($password)
 	{
-		$CI =& get_instance();
-
+        $CI =& get_instance();
+        
 		$salt = $CI->config->item('encryption_key');
 		$encrypted_password = sha1($password . $salt);
 
@@ -161,7 +161,7 @@ class User extends BaseModel
 	 */
 	public function isAdmin()
 	{
-		$CI =& get_instance();
+        $CI =& get_instance();
 
 		//Find the Admin level
 		$admin = $CI->em->getRepository('models\UserGroup')->findOneByName('Admin');
@@ -186,7 +186,7 @@ class User extends BaseModel
 	 */
 	public static function findUser($identifier)
 	{
-		$CI =& get_instance();
+        $CI =& get_instance();
 
 		$user = $CI->em->createQuery("SELECT u FROM models\User u WHERE u.username = '{$identifier}' OR u.email = '{$identifier}'")
                 ->getResult();

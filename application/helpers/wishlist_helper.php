@@ -19,6 +19,17 @@ function set_status($status, $class = '')
 }
 
 /**
+ * Show the user an error explaining that they do not have permission
+ * to view the current page
+ *
+ * @return void
+ */
+function permission_error()
+{
+    show_error('You do not have permission to view this page.', '501');
+}
+
+/**
  * Recursively print a variable wrapped in <pre> tags
  *
  * @param   $var

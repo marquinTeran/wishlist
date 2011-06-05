@@ -3,7 +3,7 @@
 /**
  * IW_Controller Class
  *
- * Base controller for all iWant controllers
+ * Base controller for all Wishlist controllers
  *
  * @author  Joseph Wynn
  */
@@ -40,7 +40,10 @@ class IW_Controller extends CI_Controller {
         parent::__construct();
 
         // Define the IS_AJAX constant
-        define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+        if ( ! defined('IS_AJAX'))
+        {
+            define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+        }
 
         // Load the Doctrine library and entity manager
         $this->load->library('doctrine');

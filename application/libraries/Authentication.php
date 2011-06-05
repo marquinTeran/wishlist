@@ -3,7 +3,7 @@
 /**
  * Authentication Class
  *
- * @package		iWant
+ * @package		Wishlist
  * @subpackage	Libraries
  * @category	Authentication
  * @author		Joseph Wynn
@@ -14,7 +14,7 @@ class Authentication {
 	/**
 	 * Current CodeIgniter instance
 	 *
-	 * @var	CI_Base
+	 * @var	CI_Controller
 	 */
 	private $CI;
 

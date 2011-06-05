@@ -14,7 +14,7 @@
 
 <body>
 	<div id="heading">
-		<h1><?=anchor('/', '<span class="i">i</span>want')?></h1>
+		<h1><?=anchor('/', 'Wishlist')?></h1>
 	</div>
 
 	<div id="container">

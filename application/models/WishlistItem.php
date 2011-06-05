@@ -24,7 +24,7 @@ class WishlistItem extends BaseModel
     protected $name;
 
     /**
-     * @Column(name="sort_order", type="smallint", nullable=false)
+     * @Column(name="sort_order", type="smallint", nullable=true)
      */
     protected $sort_order;
 

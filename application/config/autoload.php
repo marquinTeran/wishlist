@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session', 'template', 'form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'form', 'iwant');
+$autoload['helper'] = array('url', 'form', 'wishlist');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'form', 'iwant');
 |
 */
 
-$autoload['config'] = array('iwant', 'template');
+$autoload['config'] = array('wishlist', 'template');
 
 
 /*

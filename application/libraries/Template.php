@@ -3,7 +3,7 @@
 /**
  * Template Class
  *
- * @package		iWant
+ * @package		Wishlist
  * @subpackage	Libraries
  * @category	Templating
  * @author		Joseph Wynn
@@ -31,7 +31,7 @@ class Template {
 	/**
 	 * CodeIgniter Instance
 	 *
-	 * @var CI_Base
+	 * @var CI_Controller
 	 */
 	private $CI;
 
@@ -63,6 +63,13 @@ class Template {
 	 */
 	private $vars = array();
 
+    /**
+     * Script root
+     *
+     * @var string
+     */
+    private $script_root;
+
 	/**
 	 * Constructor - Get the current CI instance and load the default
 	 * configuration options
@@ -74,6 +81,12 @@ class Template {
 		//Load configuration options
 		$this->title_length = $this->CI->config->item('max_title_length');
 		$this->layout = $this->CI->config->item('template_default_layout');
+		$this->script_root = $this->CI->config->item('script_root');
+
+        if ($this->CI->config->item('prepend_base_url'))
+        {
+            $this->script_root = base_url() . $this->script_root;
+        }
 	}
 
 	/**
@@ -276,7 +289,7 @@ class Template {
             else
             {
                 // The script isn't a valid view. Add it as a <script> element
-                $script = '<script type="text/javascript" src="' . $script . '"></script>';
+                $script = '<script type="text/javascript" src="' . rtrim($this->script_root, '/') . '/' . $script . '"></script>';
             }
 		}
 

@@ -22,5 +22,5 @@ $config['default_user_page'] = 'about';
 $config['default_country'] = 'GB';
 
 
-/* End of file iwant.php */
-/* Location: ./application/config/iwant.php */
+/* End of file wishlist.php */
+/* Location: ./application/config/wishlist.php */

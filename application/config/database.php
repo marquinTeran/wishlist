@@ -42,9 +42,9 @@ $active_record = TRUE;
 
 global $db;
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'iwant';
+$db['default']['username'] = 'wishlist';
 $db['default']['password'] = 'seSw4Zb45sfjXrTF';
-$db['default']['database'] = 'iwant';
+$db['default']['database'] = 'wishlist';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

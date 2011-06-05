@@ -19,7 +19,7 @@ class About extends IW_Controller {
      */
     public function index()
     {
-		$this->template->title('I Want! Wishlist')
+		$this->template->title('Wishlist')
             ->build('about/index');
     }
 

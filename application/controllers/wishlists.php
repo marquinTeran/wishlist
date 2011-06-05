@@ -19,7 +19,6 @@ class Wishlists extends IW_Controller {
      */
     public function index()
     {
-        $user = new User;
 		$this->auth->set_permissions();
 
         $this->template->title('My Wishlists')
@@ -76,10 +75,21 @@ class Wishlists extends IW_Controller {
 
         if ($wishlist->getUser() === $this->user)
         {
+            $wishlist_items = '';
+
+            foreach ($wishlist->getItems() as $wishlist_item)
+            {
+                $wishlist_items .= $this->load->view('wishlists/wishlist-item', array(
+                    'wishlist_item' => $wishlist_item
+                ), TRUE);
+            }
+
             $this->template->title($wishlist->getName())
                 ->addPartial('new_item_form', 'wishlists/add-wishlist-item')
+                ->addScript('js/view-wishlist.js')
                 ->build('wishlists/view-owner', array(
-                    'wishlist' => $wishlist
+                    'wishlist' => $wishlist,
+                    'wishlist_items' => $wishlist_items
                 ));
         }
 
@@ -112,8 +122,53 @@ class Wishlists extends IW_Controller {
 
                 $this->em->persist($item);
                 $this->em->flush();
+
+                $status = "{$item_name} has been added to the <em>{$wishlist->getName()}</em> wishlist.";
+                $status_class = 'success';
+            }
+            else
+            {
+                $status = 'Sorry, the item name was too long.';
+                $status_class = 'error';
+            }
+
+            if (IS_AJAX)
+            {
+                echo json_encode(array(
+                    'status' => $status_class,
+                    'message' => $status,
+                    'wishlist_item' => $item->toArray(),
+                    'new_item_html' => $this->load->view('wishlists/wishlist-item', array(
+                        'wishlist_item' => $item
+                    ), TRUE)
+                ));
+
+                return;
             }
         }
+
+        set_status($status, $status_class);
+        redirect("wishlists/view/{$wishlist->getId()}");
+    }
+
+    /**
+     * Remove a WishlistItem from a User's Wishlist
+     *
+     * @param   int     $item_id
+     * @return  void
+     */
+    public function remove_item($item_id = NULL)
+    {
+        if ( ! $item_id || ! $wishlist_item = $this->em->getRepository('models\WishlistItem')->find($item_id))
+        {
+            show_404();
+        }
+
+        if ( ! $wishlist_item->getWishlist()->getUser()->getId() === $this->user->getId())
+        {
+            permission_error();
+        }
+
     }
 
 }

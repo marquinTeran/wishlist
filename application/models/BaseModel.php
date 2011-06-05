@@ -7,7 +7,7 @@ namespace models;
  *
  * The base class of most Doctrine models.
  *
- * @package		iWant
+ * @package		Wishlist
  * @subpackage	Classes
  * @category	Magic
  * @author		Joseph Wynn
@@ -25,8 +25,49 @@ class BaseModel
 	{
 	}
 
+    /**
+     * Convert the model to an array
+     *
+     * Please note that this method can be very slow and should be avoided where possible.
+     *
+     * @access  public
+     * @return  array
+     */
+    public function toArray()
+    {
+        $CI =& get_instance();
+        $CI->load->helper('inflector');
+        
+        $this_as_array = array();
+
+        foreach($this as $property => $value)
+        {
+            $get_method = camelize('get_' . $property);
+
+            // Try and use the getProperty() method
+            try
+            {
+                $value = $this->$get_method();
+            }
+            catch (Exception $e)
+            {
+                // Just use the property as it is
+            }
+
+            // If we find another instance of BaseModel, convert it to an array
+            if ($value instanceof self)
+            {
+                $value = $value->toArray();
+            }
+
+            $this_as_array[$property] = $value;
+        }
+
+        return $this_as_array;
+    }
+
 	/**
-	 * Magic __call method
+	 * __call override method
 	 *
 	 * Attempt to set/get a property. Only supports all-lowercase, underscore-separated
      * properties i.e. $this_is_a_property can be accessed using getThisIsAProperty().
@@ -40,9 +81,11 @@ class BaseModel
 	 * get() and set() methods where possible.
 	 *
 	 * @access	public
+     * @throws  Exception
 	 * @param	string	$method
 	 * @param	array	$args
 	 * @return	object|mixed
+     *
 	 */
 	public function __call($method, $args)
 	{
@@ -59,13 +102,13 @@ class BaseModel
 
 		if ($method_name != 'set' && $method_name != 'get')
 		{
-			show_error("<strong>Fatal Error:</strong> Tried to call undefined function {$method}() on class " . get_class($this) . ". (Caught by BaseModel::__call())");
+            throw new Exception("Tried to call undefined function {$method}() on class " . get_class($this));
 		}
 
 		// Property doesn't exist
 		if ( ! property_exists($this, $property))
 		{
-			show_error("<strong>Fatal Error:</strong> Tried to call {$method}() on " . get_class($this) . ". Property '{$property}' doesn't exist.");
+            throw new Exception("Tried to call {$method}() on " . get_class($this) . ". Property '{$property}' doesn't exist.");
 		}
 
 		// Set() methods
@@ -74,7 +117,7 @@ class BaseModel
 			// More than one argument was given
 			if (count($args) > 1)
 			{
-				show_error("<strong>Fatal Error:</strong> Tried to set " . get_class($this) . "->{$property}. 1 argument expected; " . count($args) . " given.");
+                throw new Exception("Tried to set " . get_class($this) . "->{$property}. 1 argument expected; " . count($args) . " given.");
 			}
 
 			$this->$property = $args[0];
