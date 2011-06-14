@@ -52,6 +52,9 @@ class IW_Controller extends CI_Controller {
         // Load the authentication library with alias 'auth'
         $this->load->library('authentication', NULL, 'auth');
 
+        // Configure some libraries
+        $this->form_validation->set_error_delimiters('<span class="error">', '</span>');
+
         if ($this->authenticated = $this->auth->authenticated())
         {
             $this->user = $this->auth->getUser();

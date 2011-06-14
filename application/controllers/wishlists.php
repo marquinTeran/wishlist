@@ -92,8 +92,10 @@ class Wishlists extends IW_Controller {
                     'wishlist_items' => $wishlist_items
                 ));
         }
-
-        // TODO: If the current user has permission to view this wishlist, load wishlists/view-guest
+        else
+        {
+            permission_error();
+        }
     }
 
     /**

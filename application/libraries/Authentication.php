@@ -148,24 +148,17 @@ class Authentication {
 	}
 
 	/**
-	 * Set the access permissions for a controller/method (page)
+     * Set access permissions based on options given. If no options are passed,
+     * the default behaviour is to check that a user is logged in.
 	 *
-	 * Permissions can be a
-	 *
-	 * If a User doesn't have permission to view this page they will be
-	 * redirected to the login page.
-	 *
-	 * @param	string	$permissions	The permissions required to access the page
+	 * @param	string	$options    This is currently not in use
 	 * @return	void
 	 */
-	public function set_permissions($permissions = 'user+')
+	public function set_permissions($options = array())
 	{
 		if ( ! $this->authenticated())
 		{
-			// TODO: Based on the permissions specified, see if the current User
-			// can access the current method
-			
-			// User does not have permission - redirect to login page
+            // User is not logged in
 			redirect('account/login?return=' . uri_string());
 		}
 	}

@@ -26,7 +26,7 @@ function set_status($status, $class = '')
  */
 function permission_error()
 {
-    show_error('You do not have permission to view this page.', '501');
+    show_error('You do not have permission to view this page.', '401');
 }
 
 /**

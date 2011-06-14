@@ -2,8 +2,6 @@
 
 namespace models;
 
-use \Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Country
  *
@@ -48,14 +46,54 @@ class Country extends BaseModel
      */
     protected $users;
 
-    public function getIso()
+    public function __construct()
     {
-    	return $this->iso;
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getName()
     {
     	return ucwords(strtolower($this->name));
+    }
+
+    /**
+     * Get iso
+     *
+     * @return	string $iso
+     */
+    public function getIso()
+    {
+        return $this->iso;
+    }
+
+    /**
+     * Get printableName
+     *
+     * @return	string $printableName
+     */
+    public function getPrintableName()
+    {
+        return $this->printableName;
+    }
+
+    /**
+     * Get iso3
+     *
+     * @return	string $iso3
+     */
+    public function getIso3()
+    {
+        return $this->iso3;
+    }
+
+    /**
+     * Get users
+     *
+     * @return	Doctrine\Common\Collections\Collection $users
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
 }

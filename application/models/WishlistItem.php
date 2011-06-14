@@ -33,46 +33,81 @@ class WishlistItem extends BaseModel
 	 */
 	protected $wishlist;
 
+
     /**
-     * Set the Wishlist that this WishlistItem belongs to
+     * Get id
      *
-     * @param   Wishlist    $wishlist
-     * @return  WishlistItem
+     * @return	integer $id
      */
-    public function setWishlist(Wishlist $wishlist)
-    {
-        $this->wishlist = $wishlist;
-        return $this;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set name
+     *
+     * @param	string 	$name
+     * @return	models\WishlistItem
+     */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
+    /**
+     * Get name
+     *
+     * @return	string $name
+     */
     public function getName()
     {
         return $this->name;
     }
 
-    public function setSortOrder($sort_order)
+    /**
+     * Set sort_order
+     *
+     * @param	smallint 	$sortOrder
+     * @return	models\WishlistItem
+     */
+    public function setSortOrder($sortOrder)
     {
-        $this->sort_order = $sort_order;
+        $this->sort_order = $sortOrder;
+        return $this;
     }
 
+    /**
+     * Get sort_order
+     *
+     * @return	smallint $sortOrder
+     */
     public function getSortOrder()
     {
         return $this->sort_order;
+    }
+
+    /**
+     * Set wishlist
+     *
+     * @param	models\Wishlist 	$wishlist
+     * @return	models\WishlistItem
+     */
+    public function setWishlist(\models\Wishlist $wishlist)
+    {
+        $this->wishlist = $wishlist;
+        return $this;
+    }
+
+    /**
+     * Get wishlist
+     *
+     * @return	models\Wishlist $wishlist
+     */
+    public function getWishlist()
+    {
+        return $this->wishlist;
     }
 
 }

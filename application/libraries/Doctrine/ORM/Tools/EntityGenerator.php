@@ -101,7 +101,7 @@ class EntityGenerator
 '/**
  * <description>
  *
- * @return <variableType>$<variableName>
+ * @return	<variableType>$<variableName>
  */
 public function <methodName>()
 {
@@ -112,22 +112,26 @@ public function <methodName>()
 '/**
  * <description>
  *
- * @param <variableType>$<variableName>
+ * @param	<variableType>	$<variableName>
+ * @return	<namespace>\<entityClassName>
  */
 public function <methodName>(<methodTypeHint>$<variableName>)
 {
 <spaces>$this-><fieldName> = $<variableName>;
+<spaces>return $this;
 }';
 
     private static $_addMethodTemplate =
 '/**
  * <description>
  *
- * @param <variableType>$<variableName>
+ * @param	<variableType>	$<variableName>
+ * @return	<namespace>\<entityClassName>
  */
 public function <methodName>(<methodTypeHint>$<variableName>)
 {
 <spaces>$this-><fieldName>[] = $<variableName>;
+<spaces>return $this;
 }';
 
     private static $_lifecycleCallbackMethodTemplate =
@@ -694,7 +698,9 @@ public function <methodName>()
           '<variableType>'      => $variableType,
           '<variableName>'      => Inflector::camelize($fieldName),
           '<methodName>'        => $methodName,
-          '<fieldName>'         => $fieldName
+          '<fieldName>'         => $fieldName,
+		  '<entityClassName>'	=> $this->_getClassName($metadata),
+		  '<namespace>'			=> $this->_getNamespace($metadata)
         );
 
         $method = str_replace(

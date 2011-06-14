@@ -2,8 +2,6 @@
 
 namespace models;
 
-use \Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * User
  *
@@ -63,7 +61,7 @@ class User extends BaseModel
     {
         parent::__construct();
 
-        $this->wishlists = new ArrayCollection();
+        $this->wishlists = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 	/**
@@ -104,28 +102,6 @@ class User extends BaseModel
 	{
 		return $this->user_group;
 	}
-
-	/**
-	 * Set the User's country
-	 *
-	 * @param	Country		$country
-	 * @return	User
-	 */
-	public function setCountry(Country $country)
-	{
-		$this->country = $country;
-        return $this;
-	}
-
-    /**
-     * Get all of this User's Wishlists
-     *
-     * @return  
-     */
-    public function getWishlists()
-    {
-        return $this->wishlists;
-    }
 
 	/**
 	 * Encrypt a Password
@@ -193,4 +169,134 @@ class User extends BaseModel
 
 		return $user ? $user[0] : FALSE;
 	}
+
+    /**
+     * Get id
+     *
+     * @return	integer $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param	string 	$username
+     * @return	models\User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return	string $username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Get password
+     *
+     * @return	string $password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set email
+     *
+     * @param	string 	$email
+     * @return	models\User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return	string $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set country
+     *
+     * @param	models\Country 	$country
+     * @return	models\User
+     */
+    public function setCountry(\models\Country $country)
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return	models\Country $country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set user_group
+     *
+     * @param	models\UserGroup 	$userGroup
+     * @return	models\User
+     */
+    public function setUserGroup(\models\UserGroup $userGroup)
+    {
+        $this->user_group = $userGroup;
+        return $this;
+    }
+
+    /**
+     * Get user_group
+     *
+     * @return	models\UserGroup $userGroup
+     */
+    public function getUserGroup()
+    {
+        return $this->user_group;
+    }
+
+    /**
+     * Add wishlists
+     *
+     * @param	models\Wishlist 	$wishlists
+     * @return	models\User
+     */
+    public function addWishlist(\models\Wishlist $wishlist)
+    {
+        $this->wishlists[] = $wishlist;
+        return $this;
+    }
+
+    /**
+     * Get wishlists
+     *
+     * @return	Doctrine\Common\Collections\Collection $wishlists
+     */
+    public function getWishlists()
+    {
+        return $this->wishlists;
+    }
 }

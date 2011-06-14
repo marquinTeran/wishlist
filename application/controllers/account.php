@@ -65,7 +65,7 @@ class Account extends IW_Controller {
 		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
 		$this->form_validation->set_rules('country', 'country', 'required|alpha|exact_length[2]');
 
-		$this->form_validation->set_message('matches', "The passwords don't match!");
+		$this->form_validation->set_message('matches', "The passwords don't match.");
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -91,6 +91,7 @@ class Account extends IW_Controller {
 
 			// Set the User's group
 			$group = $this->em->getRepository('models\UserGroup')->findOneByName('User');
+            $group->getUsers()->add($user);
 			$user->setGroup($group);
 
 			$this->em->persist($user);
