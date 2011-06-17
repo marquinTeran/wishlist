@@ -46,6 +46,5 @@
 </body>
 </html>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="<?=base_url()?>serve/f=js/jquery-1.5.2.min.js"></script>
+<script src="<?=base_url()?>serve/f=js/jquery-1.6.1.min.js"></script>
 <?=$template->scripts?>
