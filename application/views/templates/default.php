@@ -46,5 +46,5 @@
 </body>
 </html>
 
-<script src="<?=base_url()?>serve/f=js/jquery-1.6.1.min.js"></script>
+<script src="<?=base_url()?>serve/?b=js&f=jquery-1.6.1.min.js,common.js"></script>
 <?=$template->scripts?>
