@@ -16,23 +16,23 @@ class UserGroup extends BaseModel
      * @Id
      * @GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @Column(name="name", type="string", length=16, nullable=false)
      */
-    protected $name;
+    private $name;
 
     /**
      * @Column(name="level", type="smallint", nullable=false)
      */
-    protected $level;
+    private $level;
 
     /**
      * @OneToMany(targetEntity="User", mappedBy="user_group")
      * @OrderBy({"username" = "ASC"})
      */
-    protected $users;
+    private $users;
 
     public function __construct()
     {

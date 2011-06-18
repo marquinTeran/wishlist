@@ -27,16 +27,34 @@ class modelsCountryProxy extends \models\Country implements \Doctrine\ORM\Proxy\
     }
 
     
+    public function getName()
+    {
+        $this->_load();
+        return parent::getName();
+    }
+
     public function getIso()
     {
         $this->_load();
         return parent::getIso();
     }
 
-    public function getName()
+    public function getPrintableName()
     {
         $this->_load();
-        return parent::getName();
+        return parent::getPrintableName();
+    }
+
+    public function getIso3()
+    {
+        $this->_load();
+        return parent::getIso3();
+    }
+
+    public function getUsers()
+    {
+        $this->_load();
+        return parent::getUsers();
     }
 
     public function toArray()

@@ -16,27 +16,32 @@ class Wishlist extends BaseModel
      * @Id
      * @GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @Column(name="name", type="string", length=255, nullable=false)
      */
-    protected $name;
+    private $name;
 
     /**
      * @Column(name="url_title", type="string", length=255, nullable=false)
      */
-    protected $url_title;
+    private $url_title;
+
+	/**
+	 * @Column(name="public", type="boolean", nullable=false)
+	 */
+	private $public;
 
 	/**
 	 * @ManyToOne(targetEntity="User", inversedBy="wishlists")
 	 */
-	protected $user;
+	private $user;
 
     /**
      * @OneToMany(targetEntity="WishlistItem", mappedBy="wishlist")
      */
-    protected $wishlist_items;
+    private $wishlist_items;
 
     public function __construct()
     {
@@ -108,6 +113,28 @@ class Wishlist extends BaseModel
     public function getUrlTitle()
     {
         return $this->url_title;
+    }
+
+    /**
+     * Set public
+     *
+     * @param	boolean 	$urlTitle
+     * @return	models\Wishlist
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+        return $this;
+    }
+
+    /**
+     * Get public
+     *
+     * @return	string $public
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 
     /**

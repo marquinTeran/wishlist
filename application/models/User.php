@@ -21,38 +21,38 @@ class User extends BaseModel
 	 * @Column(type="integer", nullable=false)
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @Column(type="string", length=32, unique=true, nullable=false)
 	 */
-	protected $username;
+	private $username;
 
 	/**
 	 * @Column(type="string", length=64, nullable=false)
 	 */
-	protected $password;
+	private $password;
 
 	/**
 	 * @Column(type="string", length=255, unique=true, nullable=false)
 	 */
-	protected $email;
+	private $email;
 
 	/**
 	 * @ManyToOne(targetEntity="Country", inversedBy="users")
 	 * @JoinColumn(name="country_iso", referencedColumnName="iso")
 	 */
-	protected $country;
+	private $country;
 
 	/**
 	 * @ManyToOne(targetEntity="UserGroup", inversedBy="users")
 	 */
-	protected $user_group;
+	private $user_group;
 
     /**
      * @OneToMany(targetEntity="Wishlist", mappedBy="user")
      */
-    protected $wishlists;
+    private $wishlists;
 
     /**
      * Constructor

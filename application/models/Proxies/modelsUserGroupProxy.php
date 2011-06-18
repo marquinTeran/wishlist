@@ -27,6 +27,42 @@ class modelsUserGroupProxy extends \models\UserGroup implements \Doctrine\ORM\Pr
     }
 
     
+    public function getId()
+    {
+        $this->_load();
+        return parent::getId();
+    }
+
+    public function setName($name)
+    {
+        $this->_load();
+        return parent::setName($name);
+    }
+
+    public function getName()
+    {
+        $this->_load();
+        return parent::getName();
+    }
+
+    public function setLevel($level)
+    {
+        $this->_load();
+        return parent::setLevel($level);
+    }
+
+    public function getLevel()
+    {
+        $this->_load();
+        return parent::getLevel();
+    }
+
+    public function addUsers(\models\User $users)
+    {
+        $this->_load();
+        return parent::addUsers($users);
+    }
+
     public function getUsers()
     {
         $this->_load();

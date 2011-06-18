@@ -27,10 +27,40 @@ class modelsWishlistProxy extends \models\Wishlist implements \Doctrine\ORM\Prox
     }
 
     
+    public function getItems()
+    {
+        $this->_load();
+        return parent::getItems();
+    }
+
+    public function getId()
+    {
+        $this->_load();
+        return parent::getId();
+    }
+
     public function setName($name)
     {
         $this->_load();
         return parent::setName($name);
+    }
+
+    public function getName()
+    {
+        $this->_load();
+        return parent::getName();
+    }
+
+    public function setUrlTitle($urlTitle)
+    {
+        $this->_load();
+        return parent::setUrlTitle($urlTitle);
+    }
+
+    public function getUrlTitle()
+    {
+        $this->_load();
+        return parent::getUrlTitle();
     }
 
     public function setUser(\models\User $user)
@@ -39,16 +69,22 @@ class modelsWishlistProxy extends \models\Wishlist implements \Doctrine\ORM\Prox
         return parent::setUser($user);
     }
 
+    public function getUser()
+    {
+        $this->_load();
+        return parent::getUser();
+    }
+
+    public function addWishlistItems(\models\WishlistItem $wishlistItems)
+    {
+        $this->_load();
+        return parent::addWishlistItems($wishlistItems);
+    }
+
     public function getWishlistItems()
     {
         $this->_load();
         return parent::getWishlistItems();
-    }
-
-    public function getItems()
-    {
-        $this->_load();
-        return parent::getItems();
     }
 
     public function toArray()
