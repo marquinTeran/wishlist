@@ -369,7 +369,13 @@ class MySqlPlatform extends AbstractPlatform
      *                              'comment' => 'Foo',
      *                              'charset' => 'utf8',
      *                              'collate' => 'utf8_unicode_ci',
-     *                              'type'    => 'innodb',
+     *                              'engine' => 'innodb',
+     *                              'foreignKeys' => array(
+     *                                  new ForeignKeyConstraint(),
+     *                                  new ForeignKeyConstraint(),
+     *                                  new ForeignKeyConstraint(),
+     *                                  // etc
+     *                              )
      *                          );
      *
      * @return void
@@ -407,7 +413,7 @@ class MySqlPlatform extends AbstractPlatform
         $optionStrings = array();
 
         if (isset($options['comment'])) {
-            $optionStrings['comment'] = 'COMMENT = ' . $this->quote($options['comment'], 'text');
+            $optionStrings['comment'] = 'COMMENT = ' . $options['comment'];
         }
         if (isset($options['charset'])) {
             $optionStrings['charset'] = 'DEFAULT CHARACTER SET ' . $options['charset'];
