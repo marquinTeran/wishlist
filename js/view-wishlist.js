@@ -3,8 +3,9 @@ $('#add-wishlist-item-form').submit(function(e) {
 
     $.post($(this).attr('action'), $(this).serialize(), function(data) {
         if (data.status == 'success') {
+			var new_item = $(data.new_item_html);
             $('#item-name').val('');
-            $('#wishlist-items').append(data.new_item_html).fadeIn(FADE_SPEED);
+			new_item.appendTo($('#wishlist-items')).fadeIn(FADE_SPEED);
         }
     }, 'json');
 });
@@ -16,7 +17,9 @@ $('#wishlist-items').delegate('.remove-item', 'click', function(e) {
 
     $.get($(this).attr('href'), function(data) {
         if (data.status == 'success') {
-            row.fadeOut(FADE_SPEED).remove();
+            row.fadeOut(FADE_SPEED, function() {
+				$(this).remove();
+			});
         }
     }, 'json');
 });

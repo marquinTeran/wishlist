@@ -141,7 +141,8 @@ class Wishlists extends IW_Controller {
                     'message' => $status,
                     'wishlist_item' => $item->toArray(),
                     'new_item_html' => $this->load->view('wishlists/wishlist-item', array(
-                        'wishlist_item' => $item
+                        'wishlist_item' => $item,
+			  			'class' => 'hidden'
                     ), TRUE)
                 ));
 
