@@ -45,6 +45,11 @@ class User extends BaseModel
 	private $country;
 
 	/**
+	 * @Column(type="string", length=15, nullable=true)
+	 */
+	private $post_code;
+
+	/**
 	 * @ManyToOne(targetEntity="UserGroup", inversedBy="users")
 	 */
 	private $user_group;
@@ -200,6 +205,28 @@ class User extends BaseModel
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * Set post_code
+     *
+     * @param	string 	$post_code
+     * @return	models\User
+     */
+    public function setPostCode($post_code)
+    {
+        $this->post_code = $post_code;
+        return $this;
+    }
+
+    /**
+     * Get post_code
+     *
+     * @return	string $post_code
+     */
+    public function getPostCode()
+    {
+        return $this->post_code;
     }
 
     /**
