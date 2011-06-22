@@ -42,7 +42,7 @@ $route['default_controller'] = 'about';
 $route['404_override'] = 'error/error_404';
 
 // Wishlist Routes
-$route['wishlists/(:num)'] = 'wishlists/view/$1';
+$route['wishlists/(:any)'] = 'wishlists/view/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
