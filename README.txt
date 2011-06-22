@@ -3,6 +3,9 @@ All rights reserved.
 
 Wishlist is a multi-user web application for managing wishlists. It is built using the CodeIgniter framework (http://codeigniter.com/) and Doctrine ORM (http://doctrine-project.org/).
 
+REQUIREMENTS
+PHP 5.3.0+
+
 INSTALLING WISHLIST
 1.	Open application/config/database.php and enter your database configuration.
 2.	In a terminal, run the command "./application/doctrine orm:schema-tool:create"
@@ -16,3 +19,7 @@ TROUBLESHOOTING
 Q.	Links do not go to the correct URL.
 A.	Wishlist configures the base URL of the website based on your server's HTTP_HOST value.
 	If you are experiencing problems with incorrect URLs, you may want to open application/config/config.php and change $config['base_url'].
+    
+Q.  I want to use a different database system like PostgreSQL, SQLite, etc
+A.  If you don't want to use MySQL, open ./application/libraries/Doctrine.php and change $connectionOptions['driver'] to whichever driver you like.
+    For a list of PDO drivers, see http://php.net/manual/en/pdo.drivers.php
