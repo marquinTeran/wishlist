@@ -61,8 +61,8 @@ input, select { vertical-align:middle; }
 
 /* HTML Elements */
 body {
-    margin: 20px auto;
-    width: 80%;
+	margin: 20px auto;
+	width: 80%;
 }
 
 h1, h2, h3, h4 { font-family: Helvetica, Verdana, Arial, sans-serif; }
@@ -72,8 +72,8 @@ h3 { font-size: 1.3em; }
 h4 { font-size: 1.1em; }
 
 p {
-    line-height: 14px;
-    margin-bottom: 6px;
+	line-height: 14px;
+	margin-bottom: 6px;
 }
 
 ul, ol { list-style-position: inside; }
@@ -81,105 +81,154 @@ ul, ol { list-style-position: inside; }
 
 /* Containers */
 #container {
-    margin-top: 12px;
+	margin-top: 12px;
 }
 
 #navigation {
-    float: left;
+	float: left;
 }
 
 #account-menu {
-    float: right;
+	float: right;
 }
 
 #content {
-    clear: both;
-    padding-top: 22px;
+	clear: both;
+	padding-top: 22px;
 }
 
 #footer {
-    margin-top: 36px;
+	margin-top: 36px;
 }
 /* End Containers */
 
 /* Navigation & Menus */
 #navigation li, #account-menu li {
-    float: left;
-    list-style:  none;
-    margin-right: 12px;
+	float: left;
+	list-style: none;
+	margin-right: 12px;
 }
 
 #account-menu li {
-    margin-left: 12px;
-    margin-right: 0;
+	margin-left: 12px;
+	margin-right: 0;
 }
 /* End Navigation & Menus */
 
 /* Content */
 #content h2 {
-    margin-bottom: 6px;
+	margin-bottom: 6px;
 }
 /* End Content */
 
 /* Form Elements & Buttons */
+form {
+	margin: 12px 0;
+}
+
 label {
-    padding: 4px 0;
+	padding: 4px 0;
 }
 
 input, textarea, select, button, .submit, .button, .button:visited {
 	display: inline-block;
-    width: auto;
-    height: auto;
-    padding: 4px 8px;
+	width: auto;
+	height: auto;
+	padding: 4px 8px;
 	-moz-border-radius: 6px;
 	border: 1px solid rgba(0,0,0,0.25);
 	-webkit-border-radius: 6px;
-    border-radius: 6px;
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	border-radius: 6px;
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
-input:hover, textarea:hover, select:hover {
-    border: 1px solid #7C5;
+input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:focus {
+	border: 1px solid #7C5;
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+	box-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
 button, .submit .button, .button:visited {
-    vertical-align: middle;
+	vertical-align: middle;
 	background: #34758F;
 	color: #FFF;
 	text-decoration: none;
-	text-shadow: -1px -1px 3px rgba(0,0,0,0.25);
+	text-shadow: -1px -1px 4px rgba(0,0,0,0.25);
 	position: relative;
 	cursor: pointer
 }
 
 button:hover, .submit:hover, .button:hover {
-	text-shadow: -1px -1px 5px rgba(0,0,0,0.5);
+	text-shadow: -1px -1px 2px rgba(0,0,0,0.5);
 	background: #38A;
 }
 
 form.tabbed label {
-    float: left;
-    width: 150px;
+	float: left;
+	width: 150px;
+}
+
+form.tabbed input, form.tabbed textarea {
+	width: 250px;
+}
+
+input.small {
+	width: 120px !important;
 }
 
 form.tabbed div {
-    margin-bottom: 8px;
+	margin-bottom: 9px;
 }
 
 form.tabbed .error {
-    margin-left: 6px;
-    vertical-align: middle;
+	margin-left: 6px;
+	vertical-align: middle;
+}
+
+form.tabbed #controls {
+	margin-left: 150px;
+	margin-top: 12px;
+}
+
+form span.note {
+	color: #34758F;
+	font-style: italic;
+	padding-left: 8px;
+	vertical-align: middle;
 }
 /* End Form Elements & Buttons */
 
+/* Ajax-Editable Form Elements */
+.plain-text {
+	background: none;
+	border-color: transparent;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.plain-text:hover {
+	background-color: #ffb;
+	border-color: transparent;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+/* End Ajax-Editable Form Elements */
+
 /* Common Classes */
 .notice {
-    margin: 8px 0;
+	margin: 8px 0;
 }
 
 .error {
-    color: #D00;
+	color: #D00;
+}
+
+.hidden {
+	display: none;
 }
 /* End Common Classes */

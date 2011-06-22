@@ -8,6 +8,28 @@ class Account extends IW_Controller {
 	}
 
 	/**
+	 * Account Index
+	 */
+	public function index()
+	{
+		$this->template->title('My Account')
+			->build('account/index', array(
+
+			));
+	}
+
+	/**
+	 * Update Account Settings
+	 */
+	public function settings()
+	{
+		$this->template->title('Settings')
+			->build('account/settings', array(
+
+			));
+	}
+
+	/**
 	 * Log into the system
 	 */
 	public function login()
@@ -60,6 +82,12 @@ class Account extends IW_Controller {
 	 */
 	public function signup()
 	{
+		// If a user is already signed in, redirect them to the account index
+		if ($this->authenticated)
+		{
+			redirect('account');
+		}
+
 		$this->form_validation->set_rules('username', 'a username', 'required|alpha_dash|max_length[32]|callback__unique_username');
 		$this->form_validation->set_rules('password', 'a password', 'required|min_length[6]|matches[password_confirm]');
 		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');

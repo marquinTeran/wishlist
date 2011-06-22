@@ -1,10 +1,8 @@
 <p>Don't have an account? <?=anchor('account/signup', 'Sign Up')?></p>
 
-<?=form_open(($return = $this->input->get('return')) ? "account/login?return={$return}" : 'account/login')?>
+<?=form_open(($return = $this->input->get('return')) ? "account/login?return={$return}" : 'account/login', 'class="tabbed"')?>
 	<?php if ($validate && ! $login): ?>
-	<div class="error">
-		The username / email and password you entered were incorrect.
-	</div>
+		<div class="error">The username / email and password you entered were incorrect.</div>
 	<?php endif; ?>
 
 	<div>
