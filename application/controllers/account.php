@@ -92,6 +92,7 @@ class Account extends IW_Controller {
 		$this->form_validation->set_rules('password', 'a password', 'required|min_length[6]|matches[password_confirm]');
 		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
 		$this->form_validation->set_rules('country', 'country', 'required|alpha|exact_length[2]');
+		$this->form_validation->set_rules('post_code', 'post code', 'max_length[15]');
 
 		$this->form_validation->set_message('matches', "The passwords don't match.");
 
@@ -112,6 +113,7 @@ class Account extends IW_Controller {
 			$user->setUsername($this->input->post('username'));
 			$user->setPassword($this->input->post('password'));
 			$user->setEmail($this->input->post('email'));
+			$user->setPostCode($this->input->post('post_code'));
 
 			// Set the User's country
 			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));

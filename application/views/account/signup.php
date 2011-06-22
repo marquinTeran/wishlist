@@ -34,6 +34,13 @@
     <?=form_error('country')?>
 </div>
 
+<div>
+    <label for="post_code">Post Code</label>
+    <input type="text" class="small" name="post_code" id="post_code" maxlength="15" value="<?=set_value('post_code')?>" />
+	<span class="note">Optional</span>
+    <?=form_error('post_code')?>
+</div>
+
 <div id="controls">
     <button type="submit" name="sign_up" id="sign_up" class="button">Sign Up</button>
 </div>
