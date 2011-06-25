@@ -46,7 +46,7 @@ $route['(\w{2})/(.*)'] = '$2';
 $route['(\w{2})'] = $route['default_controller'];
 
 // Wishlist Routes
-$route['wishlists/(.*)'] = 'wishlists/view/$1';
+$route['wishlists/(:num)'] = 'wishlists/view/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
