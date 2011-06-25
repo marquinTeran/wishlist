@@ -7,7 +7,7 @@
  *
  * @author  Joseph Wynn
  */
-class IW_Controller extends CI_Controller {
+class WL_Controller extends CI_Controller {
 
     /**
      * Doctrine entity manager
