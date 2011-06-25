@@ -1,4 +1,4 @@
 <ul>
-	<li><?=anchor('account/login?return=' . uri_string(), 'Log In')?></li>
-	<li><?=anchor('account/signup', 'Sign Up')?></li>
+	<li><?=anchor('account/login?return=' . uri_string(), lang('log_in'))?></li>
+	<li><?=anchor('account/signup', lang('sign_up'))?></li>
 </ul>
