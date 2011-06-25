@@ -30,7 +30,7 @@ $config['default_country'] = 'GB';
 |
 */
 $config['available_languages'] = array(
-	'English' => 'english',
+	'English' => 'en',
 	'Français' => 'fr'
 );
 
