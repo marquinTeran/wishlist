@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Wishlists extends IW_Controller {
+class Wishlists extends WL_Controller {
 
 	/**
 	 * Constructor

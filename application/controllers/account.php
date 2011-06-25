@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Account extends IW_Controller {
+class Account extends WL_Controller {
 
 	public function __construct()
 	{
@@ -12,9 +12,11 @@ class Account extends IW_Controller {
 	 */
 	public function index()
 	{
-		$this->template->title('My Account')
+		$this->auth->set_permissions();
+		
+		$this->template->title('Dashboard')
 			->build('account/index', array(
-
+				'user' => $this->user
 			));
 	}
 
@@ -23,9 +25,12 @@ class Account extends IW_Controller {
 	 */
 	public function settings()
 	{
+		$this->auth->set_permissions();
+
 		$this->template->title('Settings')
 			->build('account/settings', array(
-
+				'user' => $this->user,
+				'countries' => $this->em->getRepository('models\Country')->getAllCountries()
 			));
 	}
 

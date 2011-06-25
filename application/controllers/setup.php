@@ -3,7 +3,7 @@
 /**
  * This controller sets up default records in the database
  */
-class Setup extends IW_Controller {
+class Setup extends WL_Controller {
 
 	public function __construct()
 	{

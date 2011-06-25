@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class About extends IW_Controller {
+class About extends WL_Controller {
 
 	/**
 	 * Constructor
