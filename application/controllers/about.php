@@ -12,16 +12,16 @@ class About extends WL_Controller {
 		parent::__construct();
 	}
 
-    /**
-     * Default Page
-     *
-     * @return  void
-     */
-    public function index()
-    {
+	/**
+	 * Default Page
+	 *
+	 * @return  void
+	 */
+	public function index()
+	{
 		$this->template->title('Wishlist')
-            ->build('about/index');
-    }
+			->build('about/index');
+	}
 
 }
 

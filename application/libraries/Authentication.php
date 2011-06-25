@@ -18,10 +18,10 @@ class Authentication {
 	 */
 	private $CI;
 
-    /**
-     * Authentication session data
-     */
-    private $user, $user_id, $logged_in;
+	/**
+	 * Authentication session data
+	 */
+	private $user, $user_id, $logged_in;
 
 	/**
 	 * Constructor - get the current CI instance
@@ -34,9 +34,9 @@ class Authentication {
 		$this->CI =& get_instance();
 
 		$this->user = unserialize($this->CI->session->userdata('user'));
-        $this->user_id = $this->CI->session->userdata('user_id');
-        $this->logged_in = $this->CI->session->userdata('logged_in');
-    }
+		$this->user_id = $this->CI->session->userdata('user_id');
+		$this->logged_in = $this->CI->session->userdata('logged_in');
+	}
 
 	/**
 	 * Get an Authenticated User
@@ -67,14 +67,14 @@ class Authentication {
 	 * Also store a logged_in flag, and the user_id for extra protection against tampering
 	 *
 	 * @access	public
-     * @param   models\User $user
+	 * @param   models\User $user
 	 * @return	void
 	 */
 	public function authenticate($user)
 	{
-        $this->user = $user;
-        $this->user_id = $user->getId();
-        $this->logged_in = TRUE;
+		$this->user = $user;
+		$this->user_id = $user->getId();
+		$this->logged_in = TRUE;
 
 		$this->CI->session->set_userdata('user', serialize($this->user));
 		$this->CI->session->set_userdata('logged_in', $this->logged_in);
@@ -118,11 +118,11 @@ class Authentication {
 		if ( ! $user)
 		{
 			return FALSE; //User doesn't exist
-        }
+		}
 
-        if (models\User::encryptPassword($password) != $user->getPassword())
-        {
-            return FALSE; //Incorrect password
+		if (models\User::encryptPassword($password) != $user->getPassword())
+		{
+			return FALSE; //Incorrect password
 		}
 
 		//Authenticate the user
@@ -138,27 +138,27 @@ class Authentication {
 	 */
 	public function logout()
 	{
-        $this->user = NULL;
-        $this->user_id = NULL;
-        $this->logged_in = NULL;
-        
+		$this->user = NULL;
+		$this->user_id = NULL;
+		$this->logged_in = NULL;
+
 		$this->CI->session->unset_userdata('user');
 		$this->CI->session->unset_userdata('logged_in');
 		$this->CI->session->unset_userdata('user_id');
 	}
 
 	/**
-     * Set access permissions based on options given. If no options are passed,
-     * the default behaviour is to check that a user is logged in.
+	 * Set access permissions based on options given. If no options are passed,
+	 * the default behaviour is to check that a user is logged in.
 	 *
-	 * @param	string	$options    This is currently not in use
+	 * @param	string	$options	This is currently not in use
 	 * @return	void
 	 */
 	public function set_permissions($options = array())
 	{
 		if ( ! $this->authenticated())
 		{
-            // User is not logged in
+			// User is not logged in
 			redirect('account/login?return=' . uri_string());
 		}
 	}

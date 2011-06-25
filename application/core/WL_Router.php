@@ -8,7 +8,7 @@
  *
  * @author  Joseph Wynn
  */
-class IW_Router extends CI_Router {
+class WL_Router extends CI_Router {
 
     /**
 	 * Set the method name

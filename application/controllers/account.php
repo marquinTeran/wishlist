@@ -126,7 +126,7 @@ class Account extends WL_Controller {
 
 			// Set the User's group
 			$group = $this->em->getRepository('models\UserGroup')->findOneByName('User');
-            $group->getUsers()->add($user);
+			$group->getUsers()->add($user);
 			$user->setGroup($group);
 
 			$this->em->persist($user);

@@ -22,7 +22,7 @@ class Template {
 
 	/**
 	 * An array of views containing scripts to be loaded into the template.
-     * Converted to a string during build() for direct access in the template layout.
+	 * Converted to a string during build() for direct access in the template layout.
 	 *
 	 * @var array
 	 */
@@ -49,12 +49,12 @@ class Template {
 	 */
 	private $title_length;
 
-    /**
-     * Views to be loaded as variables when the template is build
-     *
-     * @var array
-     */
-    private $partials = array();
+	/**
+	 * Views to be loaded as variables when the template is build
+	 *
+	 * @var array
+	 */
+	private $partials = array();
 
 	/**
 	 * Variables to be loaded when the template is built
@@ -63,12 +63,12 @@ class Template {
 	 */
 	private $vars = array();
 
-    /**
-     * Script root
-     *
-     * @var string
-     */
-    private $script_root;
+	/**
+	 * Script root
+	 *
+	 * @var string
+	 */
+	private $script_root;
 
 	/**
 	 * Constructor - Get the current CI instance and load the default
@@ -83,10 +83,10 @@ class Template {
 		$this->layout = $this->CI->config->item('template_default_layout');
 		$this->script_root = $this->CI->config->item('script_root');
 
-        if ($this->CI->config->item('prepend_base_url'))
-        {
-            $this->script_root = base_url() . $this->script_root;
-        }
+		if ($this->CI->config->item('prepend_base_url'))
+		{
+			$this->script_root = base_url() . $this->script_root;
+		}
 	}
 
 	/**
@@ -145,20 +145,20 @@ class Template {
 	 *
 	 * @access	public
 	 * @param	string|array	$vars
-	 * @param	mixed           $value
+	 * @param	mixed		   $value
 	 * @return	Template
 	 */
 	public function setVar($vars, $value = NULL)
 	{
-        if ( ! is_array($vars))
-        {
-            $vars = array($vars => $value);
-        }
+		if ( ! is_array($vars))
+		{
+			$vars = array($vars => $value);
+		}
 
-        foreach ($vars as $var => $value)
-        {
-            $this->vars[$var] = $value;
-        }
+		foreach ($vars as $var => $value)
+		{
+			$this->vars[$var] = $value;
+		}
 
 		return $this;
 	}
@@ -172,10 +172,10 @@ class Template {
 	 */
 	public function unsetVar($var)
 	{
-        if (array_key_exists($var, $this->vars))
-        {
-            unset($this->vars[$var]);
-        }
+		if (array_key_exists($var, $this->vars))
+		{
+			unset($this->vars[$var]);
+		}
 
 		return $this;
 	}
@@ -192,59 +192,59 @@ class Template {
 		return $this;
 	}
 
-    /**
-     * Remove a Script
-     *
-     * @param   string  $script
-     * @return  Template
-     */
-    public function removeScript($script)
-    {
-        if (array_key_exists($script, $this->scripts))
-        {
-            unset($this->scripts[$script]);
-        }
+	/**
+	 * Remove a Script
+	 *
+	 * @param   string  $script
+	 * @return  Template
+	 */
+	public function removeScript($script)
+	{
+		if (array_key_exists($script, $this->scripts))
+		{
+			unset($this->scripts[$script]);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Add a Partial
-     *
-     * @param   string|array    $partial
-     * @param   string          $view
-     * @return  Template
-     */
-    public function addPartial($partials, $view)
-    {
-        if ( ! is_array($partials))
-        {
-            $partials = array($partials => $view);
-        }
+	/**
+	 * Add a Partial
+	 *
+	 * @param   string|array	$partial
+	 * @param   string		  $view
+	 * @return  Template
+	 */
+	public function addPartial($partials, $view)
+	{
+		if ( ! is_array($partials))
+		{
+			$partials = array($partials => $view);
+		}
 
-        foreach ($partials as $partial => $view)
-        {
-            $this->partials[$partial] = $view;
-        }
+		foreach ($partials as $partial => $view)
+		{
+			$this->partials[$partial] = $view;
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Remove a Partial
-     *
-     * @param   string  $partial
-     * @return  Template
-     */
-    public function removePartial($partial)
-    {
-        if (array_key_exists($partial, $this->partials))
-        {
-            unset($this->partials[$partial]);
-        }
+	/**
+	 * Remove a Partial
+	 *
+	 * @param   string  $partial
+	 * @return  Template
+	 */
+	public function removePartial($partial)
+	{
+		if (array_key_exists($partial, $this->partials))
+		{
+			unset($this->partials[$partial]);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
 	/**
 	 * Build Page
@@ -272,25 +272,25 @@ class Template {
 		// Load the $template var (can be used in scripts, partials, layout and content)
 		$this->setVar('template', $this);
 
-        // Load the partials
-        foreach ($this->partials as $partial => $view)
-        {
-            $this->setVar($partial, $this->CI->load->view($view, $this->vars, TRUE));
-        }
+		// Load the partials
+		foreach ($this->partials as $partial => $view)
+		{
+			$this->setVar($partial, $this->CI->load->view($view, $this->vars, TRUE));
+		}
 
 		// Process the scripts
 		foreach ($this->scripts as &$script)
 		{
-            // First try and load the script as a view
+			// First try and load the script as a view
 			if (file_exists(APPPATH . 'views/' . $script . '.php'))
 			{
 				$script = $this->CI->load->view($script, $this->vars, TRUE);
 			}
-            else
-            {
-                // The script isn't a valid view. Add it as a <script> element
-                $script = '<script type="text/javascript" src="' . rtrim($this->script_root, '/') . '/' . $script . '"></script>';
-            }
+			else
+			{
+				// The script isn't a valid view. Add it as a <script> element
+				$script = '<script type="text/javascript" src="' . rtrim($this->script_root, '/') . '/' . $script . '"></script>';
+			}
 		}
 
 		// Merge the content of all of the scripts
