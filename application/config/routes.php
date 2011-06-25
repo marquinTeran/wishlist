@@ -41,6 +41,10 @@
 $route['default_controller'] = 'about';
 $route['404_override'] = 'error/error_404';
 
+// Language Routes
+$route['(\w{2})/(.*)'] = '$2';
+$route['(\w{2})'] = $route['default_controller'];
+
 // Wishlist Routes
 $route['wishlists/(:any)'] = 'wishlists/view/$1';
 
