@@ -8,7 +8,7 @@
 | This is the page that users will be redirected to after logging in.
 |
 */
-$config['default_user_page'] = 'about';
+$config['default_user_page'] = 'wishlists';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +20,19 @@ $config['default_user_page'] = 'about';
 |
 */
 $config['default_country'] = 'GB';
+
+/*
+|--------------------------------------------------------------------------
+| Available Languages
+|--------------------------------------------------------------------------
+|
+| An array of languages that are available for translation
+|
+*/
+$config['available_languages'] = array(
+	'English' => 'english',
+	'Français' => 'fr'
+);
 
 
 /* End of file wishlist.php */
