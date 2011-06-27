@@ -3,14 +3,6 @@
 class Error extends WL_Controller {
 
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * 404 error handler
 	 *
 	 * @return  void

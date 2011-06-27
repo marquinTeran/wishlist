@@ -5,11 +5,6 @@
  */
 class Setup extends WL_Controller {
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function index()
 	{
 		$group = new models\UserGroup;

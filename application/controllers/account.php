@@ -2,11 +2,6 @@
 
 class Account extends WL_Controller {
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	/**
 	 * Account Index
 	 */
@@ -30,7 +25,8 @@ class Account extends WL_Controller {
 		$this->template->title('Settings')
 			->build('account/settings', array(
 				'user' => $this->user,
-				'countries' => $this->em->getRepository('models\Country')->getAllCountries()
+				'countries' => $this->em->getRepository('models\Country')->getAllCountries(),
+				'languages' => $this->config->item('available_languages')
 			));
 	}
 
@@ -119,6 +115,7 @@ class Account extends WL_Controller {
 			$user->setPassword($this->input->post('password'));
 			$user->setEmail($this->input->post('email'));
 			$user->setPostCode($this->input->post('post_code'));
+			$user->setLanguage($this->config->item('default_language'));
 
 			// Set the User's country
 			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));

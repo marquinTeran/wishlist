@@ -3,16 +3,6 @@
 class Wishlists extends WL_Controller {
 
 	/**
-	 * Constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * Display the current user's wishlist
 	 *
 	 * @return  void

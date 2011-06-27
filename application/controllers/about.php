@@ -3,16 +3,6 @@
 class About extends WL_Controller {
 
 	/**
-	 * Constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * Default Page
 	 *
 	 * @return  void
