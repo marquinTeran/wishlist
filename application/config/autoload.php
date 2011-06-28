@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'form', 'wishlist', 'language');
 |
 */
 
-$autoload['config'] = array('wishlist', 'template');
+$autoload['config'] = array('template');
 
 
 /*
