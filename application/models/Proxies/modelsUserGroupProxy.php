@@ -15,7 +15,8 @@ class modelsUserGroupProxy extends \models\UserGroup implements \Doctrine\ORM\Pr
         $this->_entityPersister = $entityPersister;
         $this->_identifier = $identifier;
     }
-    private function _load()
+    /** @private */
+    public function __load()
     {
         if (!$this->__isInitialized__ && $this->_entityPersister) {
             $this->__isInitialized__ = true;
@@ -25,59 +26,59 @@ class modelsUserGroupProxy extends \models\UserGroup implements \Doctrine\ORM\Pr
             unset($this->_entityPersister, $this->_identifier);
         }
     }
-
+    
     
     public function getId()
     {
-        $this->_load();
+        $this->__load();
         return parent::getId();
     }
 
     public function setName($name)
     {
-        $this->_load();
+        $this->__load();
         return parent::setName($name);
     }
 
     public function getName()
     {
-        $this->_load();
+        $this->__load();
         return parent::getName();
     }
 
     public function setLevel($level)
     {
-        $this->_load();
+        $this->__load();
         return parent::setLevel($level);
     }
 
     public function getLevel()
     {
-        $this->_load();
+        $this->__load();
         return parent::getLevel();
     }
 
     public function addUsers(\models\User $users)
     {
-        $this->_load();
+        $this->__load();
         return parent::addUsers($users);
     }
 
     public function getUsers()
     {
-        $this->_load();
+        $this->__load();
         return parent::getUsers();
     }
 
     public function toArray()
     {
-        $this->_load();
+        $this->__load();
         return parent::toArray();
     }
 
     public function __call($method, $args)
     {
-        $this->_load();
+        $this->__load();
         return parent::__call($method, $args);
     }
 

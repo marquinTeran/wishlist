@@ -15,7 +15,8 @@ class modelsCountryProxy extends \models\Country implements \Doctrine\ORM\Proxy\
         $this->_entityPersister = $entityPersister;
         $this->_identifier = $identifier;
     }
-    private function _load()
+    /** @private */
+    public function __load()
     {
         if (!$this->__isInitialized__ && $this->_entityPersister) {
             $this->__isInitialized__ = true;
@@ -25,47 +26,47 @@ class modelsCountryProxy extends \models\Country implements \Doctrine\ORM\Proxy\
             unset($this->_entityPersister, $this->_identifier);
         }
     }
-
+    
     
     public function getName()
     {
-        $this->_load();
+        $this->__load();
         return parent::getName();
     }
 
     public function getIso()
     {
-        $this->_load();
+        $this->__load();
         return parent::getIso();
     }
 
     public function getPrintableName()
     {
-        $this->_load();
+        $this->__load();
         return parent::getPrintableName();
     }
 
     public function getIso3()
     {
-        $this->_load();
+        $this->__load();
         return parent::getIso3();
     }
 
     public function getUsers()
     {
-        $this->_load();
+        $this->__load();
         return parent::getUsers();
     }
 
     public function toArray()
     {
-        $this->_load();
+        $this->__load();
         return parent::toArray();
     }
 
     public function __call($method, $args)
     {
-        $this->_load();
+        $this->__load();
         return parent::__call($method, $args);
     }
 

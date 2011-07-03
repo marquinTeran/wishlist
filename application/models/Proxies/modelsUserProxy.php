@@ -15,7 +15,8 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
         $this->_entityPersister = $entityPersister;
         $this->_identifier = $identifier;
     }
-    private function _load()
+    /** @private */
+    public function __load()
     {
         if (!$this->__isInitialized__ && $this->_entityPersister) {
             $this->__isInitialized__ = true;
@@ -25,59 +26,119 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
             unset($this->_entityPersister, $this->_identifier);
         }
     }
-
+    
     
     public function setPassword($password)
     {
-        $this->_load();
+        $this->__load();
         return parent::setPassword($password);
     }
 
     public function setGroup(\models\UserGroup $group)
     {
-        $this->_load();
+        $this->__load();
         return parent::setGroup($group);
     }
 
     public function getGroup()
     {
-        $this->_load();
+        $this->__load();
         return parent::getGroup();
-    }
-
-    public function setCountry(\models\Country $country)
-    {
-        $this->_load();
-        return parent::setCountry($country);
-    }
-
-    public function getWishlists()
-    {
-        $this->_load();
-        return parent::getWishlists();
     }
 
     public function authenticate()
     {
-        $this->_load();
+        $this->__load();
         return parent::authenticate();
     }
 
     public function isAdmin()
     {
-        $this->_load();
+        $this->__load();
         return parent::isAdmin();
+    }
+
+    public function getId()
+    {
+        $this->__load();
+        return parent::getId();
+    }
+
+    public function setUsername($username)
+    {
+        $this->__load();
+        return parent::setUsername($username);
+    }
+
+    public function getUsername()
+    {
+        $this->__load();
+        return parent::getUsername();
+    }
+
+    public function getPassword()
+    {
+        $this->__load();
+        return parent::getPassword();
+    }
+
+    public function setEmail($email)
+    {
+        $this->__load();
+        return parent::setEmail($email);
+    }
+
+    public function getEmail()
+    {
+        $this->__load();
+        return parent::getEmail();
+    }
+
+    public function setCountry(\models\Country $country)
+    {
+        $this->__load();
+        return parent::setCountry($country);
+    }
+
+    public function getCountry()
+    {
+        $this->__load();
+        return parent::getCountry();
+    }
+
+    public function setUserGroup(\models\UserGroup $userGroup)
+    {
+        $this->__load();
+        return parent::setUserGroup($userGroup);
+    }
+
+    public function getUserGroup()
+    {
+        $this->__load();
+        return parent::getUserGroup();
+    }
+
+    public function addWishlist(\models\Wishlist $wishlist)
+    {
+        $this->__load();
+        return parent::addWishlist($wishlist);
+    }
+
+    public function getWishlists()
+    {
+        $this->__load();
+        return parent::getWishlists();
     }
 
     public function toArray()
     {
-        $this->_load();
+        $this->__load();
         return parent::toArray();
     }
 
     public function __call($method, $args)
     {
-        $this->_load();
+        $this->__load();
         return parent::__call($method, $args);
     }
 
