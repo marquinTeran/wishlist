@@ -2,3 +2,4 @@
 .project
 user_guide/
 application/models/Proxies/
+application/logs/
