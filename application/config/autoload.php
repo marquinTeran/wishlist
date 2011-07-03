@@ -96,7 +96,7 @@ $autoload['config'] = array('template');
 |
 */
 
-$autoload['language'] = array('site_wide');
+$autoload['language'] = array();
 
 
 /*
