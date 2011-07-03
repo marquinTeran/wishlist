@@ -25,6 +25,16 @@
 	</div>
 
 	<div>
+		<label for="language">Language</label>
+		<select name="language" id="language">
+			<?php foreach ($languages as $iso => $language): ?>
+			<option value="<?=$iso?>"<?=$iso == $user->getLanguage() ? ' selected="selected"' : ''?>><?=$language['name']?></option>
+			<?php endforeach; ?>
+		</select>
+		<?=form_error('country')?>
+	</div>
+
+	<div>
 		<label for="post_code">Post Code</label>
 		<input type="text" class="small" name="post_code" id="post_code" maxlength="15" value="<?=set_value('post_code', $user->getPostCode())?>" />
 		<span class="note">Optional</span>

@@ -43,8 +43,8 @@
 		<div id="benchmark">Page generated in <?=$this->benchmark->elapsed_time()?> seconds</div>
 
 		<ul id="change-language">
-			<?php foreach ($available_languages as $language => $folder): ?>
-				<li><?=anchor($folder . uri_string(), $language)?></li>
+			<?php foreach ($available_languages as $iso => $language): ?>
+				<li><?=anchor('set-language/' . $iso . '?return=' . uri_string(), $language['name'])?></li>
 			<?php endforeach; ?>
 		</ul>
 	</div>
