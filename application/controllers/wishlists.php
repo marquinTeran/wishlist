@@ -9,7 +9,7 @@ class Wishlists extends WL_Controller {
 	 */
 	public function index()
 	{
-		$this->auth->set_permissions();
+		$this->auth->require_login();
 
 		$this->template->title('My Wishlists')
 			->build('wishlists/index', array(

@@ -127,6 +127,7 @@ class Authentication {
 
 		//Authenticate the user
 		$this->authenticate($user);
+
 		return TRUE;
 	}
 
@@ -148,13 +149,11 @@ class Authentication {
 	}
 
 	/**
-	 * Set access permissions based on options given. If no options are passed,
-	 * the default behaviour is to check that a user is logged in.
+	 * Require the user to be logged in. If they are not, redirect them to the login page
 	 *
-	 * @param	string	$options	This is currently not in use
 	 * @return	void
 	 */
-	public function set_permissions($options = array())
+	public function require_login()
 	{
 		if ( ! $this->authenticated())
 		{
