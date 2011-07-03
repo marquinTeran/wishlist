@@ -1,25 +1,36 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * IW Router Class
+ * WL Router Class
  *
- * Overrides set_method() to automatically convert dashes (-) in the URI
- * to underscores (_)
+ * Overrides _set_request() to automatically convert dashes (-) in the URI to underscores (_)
  *
  * @author  Joseph Wynn
  */
 class WL_Router extends CI_Router {
 
-    /**
-	 * Set the method name
+	/**
+	 * Set the Route
 	 *
-	 * @access	public
-	 * @param	string
+	 * This function takes an array of URI segments as
+	 * input, and sets the current class/method
+	 *
+	 * @access	private
+	 * @param	array
+	 * @param	bool
 	 * @return	void
 	 */
-	function set_method($method)
-	{
-		$this->method = str_replace('-', '_', $method);
+	function _set_request($segments = array())
+    {
+        for ( $i = 0; $i < 2; $i++ )
+        {
+            if ( isset($segments[ $i ]) && strpos($segments[ $i ], '-') !== FALSE )
+            {
+                $segments[ $i ] = str_replace('-', '_', $segments[ $i ]);
+            }
+        }
+
+        return parent::_set_request($segments);
 	}
 
 }
