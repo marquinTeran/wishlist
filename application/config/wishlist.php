@@ -12,27 +12,43 @@ $config['default_user_page'] = 'wishlists';
 
 /*
 |--------------------------------------------------------------------------
-| Default Country
+| Default Country / Language
 |--------------------------------------------------------------------------
 |
-| This item determines the country that is selected by default. It must be
-| a valid ISO code.
+| These item determines the country and language that are selected by default.
+|
+| 	default_country must be a valid ISO code
+|
+| 	default_language must be a valid lowercase ISO code specified in the
+|	available_languages array below.
 |
 */
 $config['default_country'] = 'GB';
+$config['default_language'] = 'en';
 
 /*
 |--------------------------------------------------------------------------
-| Available Languages
+| Languages
 |--------------------------------------------------------------------------
 |
-| An array of languages that are available for translation
+| available_languages - An array of languages that are available for translation
+| language_cookie - The name of the cookie in which to store the current language
+| language_cookie_expire - Expiry time of the language cookie. Default: 2 weeks (1209600)
 |
 */
 $config['available_languages'] = array(
-	'English' => 'en',
-	'Français' => 'fr'
+	'en' => array(
+		'name' => 'English',
+		'folder' => 'english'
+	),
+	'fr' => array(
+		'name' => 'Français',
+		'folder' => 'french'
+	)
 );
+
+$config['language_cookie'] = 'wishlist-language';
+$config['language_cookie_expire'] = 1209600;
 
 
 /* End of file wishlist.php */

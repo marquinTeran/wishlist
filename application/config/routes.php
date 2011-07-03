@@ -37,13 +37,11 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
 $route['default_controller'] = 'about';
 $route['404_override'] = 'error/error_404';
 
 // Language Routes
-$route['(\w{2})/(.*)'] = '$2';
-$route['(\w{2})'] = $route['default_controller'];
+$route['set-language/(\w{2}).*'] = 'set-language/index/$1';
 
 // Wishlist Routes
 $route['wishlists/(:num)'] = 'wishlists/view/$1';

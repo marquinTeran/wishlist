@@ -59,11 +59,20 @@ class WL_Controller extends CI_Controller {
 		{
 			$this->user = $this->auth->getUser();
 			$account_menu = 'navigation/user-menu';
+
+			// Set the site language to the user's language
+			$available_languages = $this->config->item('available_languages');
+			$language = $this->user->getLanguage();
+			$this->config->set_item('language', $available_languages[$language]['folder']);
 		}
 		else
 		{
 			$account_menu = 'navigation/guest-menu';
 		}
+
+		// Load the site-wide language file
+		// This can't be auto-loaded as we need to set the user's language first
+		$this->lang->load('site_wide');
 
 		// Default navigation
 		$this->load->vars(array(
@@ -75,5 +84,5 @@ class WL_Controller extends CI_Controller {
 
 }
 
-/* End of file MY_Controller.php */
-/* Location: ./application/core/MY_Controller.php */
+/* End of file WL_Controller.php */
+/* Location: ./application/core/WL_Controller.php */

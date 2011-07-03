@@ -45,6 +45,11 @@ class User extends BaseModel
 	private $country;
 
 	/**
+	 * @Column(type="string", length=2, nullable=false)
+	 */
+	private $language;
+
+	/**
 	 * @Column(type="string", length=15, nullable=true)
 	 */
 	private $post_code;
@@ -82,30 +87,6 @@ class User extends BaseModel
 
 		$this->password = $encrypted_password;
         return $this;
-	}
-
-	/**
-	 * Shorthand for setUserGroup
-	 *
-	 * @access	public
-	 * @param	UserGroup	$group
-	 * @return	User
-	 */
-	public function setGroup(UserGroup $group)
-	{
-		$this->user_group = $group;
-        return $this;
-	}
-
-	/**
-	 * Shorthand for getUserGroup
-	 *
-	 * @access	public
-	 * @return	UserGroup
-	 */
-	public function getGroup()
-	{
-		return $this->user_group;
 	}
 
 	/**
@@ -282,6 +263,52 @@ class User extends BaseModel
     {
         return $this->country;
     }
+
+    /**
+     * Set language
+     *
+     * @param	string 	$language
+     * @return	models\User
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return	string	$country
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+	/**
+	 * Shorthand for setUserGroup
+	 *
+	 * @access	public
+	 * @param	UserGroup	$group
+	 * @return	User
+	 */
+	public function setGroup(UserGroup $group)
+	{
+		$this->user_group = $group;
+        return $this;
+	}
+
+	/**
+	 * Shorthand for getUserGroup
+	 *
+	 * @access	public
+	 * @return	UserGroup
+	 */
+	public function getGroup()
+	{
+		return $this->user_group;
+	}
 
     /**
      * Set user_group
