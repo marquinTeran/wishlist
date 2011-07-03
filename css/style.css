@@ -22,7 +22,7 @@ background:transparent;
 html { overflow-y: scroll; -webkit-font-smoothing: antialiased; }
 body { font:13px sans-serif; *font-size:small; *font:x-small; line-height:1.22; }
 table { font-size:inherit; font:100%; }
-select, input, textarea { font:99% sans-serif; }
+select, input, button, .button, textarea { font:99% sans-serif; }
 
 input[type="radio"] { vertical-align: text-bottom; }
 input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
@@ -126,6 +126,19 @@ form {
 	margin: 12px 0;
 }
 
+fieldset {
+	border: 1px solid #BFBFBF;
+	padding: 8px;
+	margin-bottom: 32px;
+}
+
+legend {
+	padding: 0 8px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	color: #34758F;
+}
+
 label {
 	padding: 4px 0;
 }
@@ -136,7 +149,7 @@ input, textarea, select, button, .submit, .button, .button:visited {
 	height: auto;
 	padding: 4px 8px;
 	-moz-border-radius: 6px;
-	border: 1px solid rgba(0,0,0,0.25);
+	border: 1px solid #BFBFBF;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
@@ -151,14 +164,14 @@ input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:f
 	box-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
-button, .submit .button, .button:visited {
+button, .submit, .button, .button:visited {
 	vertical-align: middle;
 	background: #34758F;
 	color: #FFF;
 	text-decoration: none;
 	text-shadow: -1px -1px 4px rgba(0,0,0,0.25);
 	position: relative;
-	cursor: pointer
+	cursor: pointer;
 }
 
 button:hover, .submit:hover, .button:hover {
@@ -191,6 +204,15 @@ form.tabbed .error {
 form.tabbed #controls {
 	margin-left: 150px;
 	margin-top: 12px;
+	clear: both;
+}
+
+#controls .center {
+	margin: 0 auto;
+}
+
+#controls button, #controls .button, #controls .submit {
+	margin-right: 4px;
 }
 
 form span.note {
