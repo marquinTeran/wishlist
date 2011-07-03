@@ -7,9 +7,9 @@ class Account extends WL_Controller {
 	 */
 	public function index()
 	{
-		$this->auth->set_permissions();
+		$this->auth->require_login();
 		
-		$this->template->title('Dashboard')
+		$this->template->title(lang('dashboard'))
 			->build('account/index', array(
 				'user' => $this->user
 			));
@@ -20,9 +20,9 @@ class Account extends WL_Controller {
 	 */
 	public function settings()
 	{
-		$this->auth->set_permissions();
+		$this->auth->require_login();
 
-		$this->template->title('Settings')
+		$this->template->title(lang('settings'))
 			->build('account/settings', array(
 				'user' => $this->user,
 				'countries' => $this->em->getRepository('models\Country')->getAllCountries(),
@@ -49,7 +49,7 @@ class Account extends WL_Controller {
 			&& ! $this->auth->authenticated())
 		{
 			$this->template
-				 ->title('Log In')
+				 ->title(lang('log_in'))
 				 ->unsetVar('account_menu')
 				 ->build('account/login', array(
 				 	'login' => $login,
@@ -100,7 +100,7 @@ class Account extends WL_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->template
-				 ->title('Sign Up')
+				 ->title(lang('sign_up'))
 				 ->unsetVar('account_menu')
 				 ->build('account/signup', array(
 				 	'selected_country' => ! $this->input->post('country') ? $this->config->item('default_country') : $this->input->post('country'),
@@ -115,7 +115,11 @@ class Account extends WL_Controller {
 			$user->setPassword($this->input->post('password'));
 			$user->setEmail($this->input->post('email'));
 			$user->setPostCode($this->input->post('post_code'));
-			$user->setLanguage($this->config->item('default_language'));
+
+			// Set the user's language
+			$language_cookie = $this->input->cookie($this->config->item('language_cookie'));
+			$default_language = $this->config->item('default_language');
+			$user->setLanguage($language_cookie ? $language_cookie : $default_language);
 
 			// Set the User's country
 			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));
