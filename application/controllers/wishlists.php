@@ -35,6 +35,7 @@ class Wishlists extends WL_Controller {
 				$wishlist = new models\Wishlist;
 				$wishlist->setName($wishlist_name);
 				$wishlist->setUser($this->user);
+				$wishlist->setPublic(TRUE); // TODO: Use the user's settings
 
 				$this->em->persist($wishlist);
 				$this->em->flush();
