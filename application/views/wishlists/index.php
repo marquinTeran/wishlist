@@ -1,7 +1,7 @@
 <?=$new_wishlist_form?>
 
 <?php if (count($wishlists) == 0): ?>
-	<p class="notice">No wishlists!</p>
+	<p class="notice">You don't have any wish lists!</p>
 <?php else: ?>
 	<ul>
 	<?php foreach($wishlists as $wishlist): ?>
