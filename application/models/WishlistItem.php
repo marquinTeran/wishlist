@@ -33,6 +33,20 @@ class WishlistItem extends BaseModel
 	 */
 	private $wishlist;
 
+	/**
+	 * @var array
+	 */
+	private $recommended_items = array();
+
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->recommended_items = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
     /**
      * Get id
@@ -109,5 +123,27 @@ class WishlistItem extends BaseModel
     {
         return $this->wishlist;
     }
+
+	/**
+	 * Set recommended_items
+	 *
+	 * @param	array	$recommended_items
+	 * @return	models/WishlistItem
+	 */
+	public function setRecommendedItems($recommended_items)
+	{
+		$this->recommended_items = $recommended_items;
+		return $this;
+	}
+
+	/**
+	 * Get recommended items
+	 *
+	 * @return	array	$recommended_items
+	 */
+	public function getRecommendedItems()
+	{
+		return $this->recommended_items;
+	}
 
 }

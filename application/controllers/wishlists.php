@@ -66,10 +66,13 @@ class Wishlists extends WL_Controller {
 
 		if ($wishlist->getUser() === $this->user)
 		{
+			$this->load->library('ebay');
 			$wishlist_items = '';
 
 			foreach ($wishlist->getItems() as $wishlist_item)
 			{
+				$wishlist_item->setRecommendedItems($this->ebay->get_recommendations($wishlist_item->getName()));
+
 				$wishlist_items .= $this->load->view('wishlists/wishlist-item', array(
 					'wishlist_item' => $wishlist_item
 				), TRUE);

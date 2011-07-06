@@ -7,6 +7,7 @@ namespace models;
  *
  * @Entity
  * @Table(name="wishlist")
+ * @HasLifeCycleCallbacks
  * @author Joseph Wynn
  */
 class Wishlist extends BaseModel
@@ -49,6 +50,17 @@ class Wishlist extends BaseModel
 
         $this->wishlist_items = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+	/**
+	 * Pre-Persist Callback Method
+	 *
+	 * @PrePersist
+	 * @return	void
+	 */
+	public function onPrePersist()
+	{
+		$this->public = TRUE;
+	}
 
     /**
      * Alias for getWishlistItems()

@@ -92,6 +92,11 @@ ul, ol { list-style-position: inside; }
 	float: right;
 }
 
+#status {
+	clear: left;
+	margin-top: 12px;
+}
+
 #content {
 	clear: both;
 	padding-top: 22px;
