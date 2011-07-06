@@ -18,6 +18,7 @@ class WL_Lang extends CI_Lang {
 
 		$CFG->load('wishlist');
 		$available_languages = $CFG->item('available_languages');
+		$default_language = $CFG->item('default_language');
 
 		if (($language = $IN->cookie($CFG->item('language_cookie'))) && array_key_exists($language, $available_languages))
 		{
@@ -25,7 +26,7 @@ class WL_Lang extends CI_Lang {
 		}
 		else
 		{
-			$CFG->set_item('language', $CFG->item('default_language'));
+			$CFG->set_item('language', $available_languages[$default_language]['folder']);
 		}
 	}
 
