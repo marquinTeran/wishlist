@@ -4,7 +4,7 @@
 
 	<div>
 		<label for="username">Username</label>
-		<input type="text" name="username" id="username" maxlength="32" value="<?=set_value('username', $user->getUsername())?>" />
+		<input type="text" name="username" id="username" maxlength="32" value="<?=$user->getUsername()?>" disabled />
 		<?=form_error('username')?>
 	</div>
 
@@ -18,7 +18,7 @@
 		<label for="country">Country</label>
 		<select name="country" id="country">
 			<?php foreach ($countries as $key => $country): ?>
-			<option value="<?=$country->getIso()?>"<?=$country->getIso() == $user->getCountry()->getIso() ? ' selected="selected"' : ''?>><?=$country->getName()?></option>
+			<option value="<?=$country->getIso()?>"<?=set_select('country', $country->getIso(), $country->getIso() == $user->getCountry()->getIso())?>><?=$country->getName()?></option>
 			<?php endforeach; ?>
 		</select>
 		<?=form_error('country')?>
@@ -28,7 +28,7 @@
 		<label for="language">Language</label>
 		<select name="language" id="language">
 			<?php foreach ($languages as $iso => $language): ?>
-			<option value="<?=$iso?>"<?=$iso == $user->getLanguage() ? ' selected="selected"' : ''?>><?=$language['name']?></option>
+			<option value="<?=$iso?>"<?=set_select('language', $iso, $iso == $user->getLanguage())?>><?=$language['name']?></option>
 			<?php endforeach; ?>
 		</select>
 		<?=form_error('country')?>

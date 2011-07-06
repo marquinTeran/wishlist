@@ -8,7 +8,7 @@ class Account extends WL_Controller {
 	public function index()
 	{
 		$this->auth->require_login();
-		
+
 		$this->template->title(lang('dashboard'))
 			->build('account/index', array(
 				'user' => $this->user
@@ -21,6 +21,27 @@ class Account extends WL_Controller {
 	public function settings()
 	{
 		$this->auth->require_login();
+
+		$this->form_validation->set_rules('password', 'a password', 'min_length[6]|matches[password_confirm]');
+		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
+		$this->form_validation->set_rules('country', 'country', 'required|callback__valid_country');
+		$this->form_validation->set_rules('language', 'language', 'required|callback__valid_language');
+		$this->form_validation->set_rules('post_code', 'post code', 'max_length[15]');
+		$this->form_validation->set_message('matches', "The passwords don't match.");
+
+		if ($this->form_validation->run())
+		{
+			// Update the user's settings
+			$this->user->setEmail($this->input->post('email'));
+			$this->user->setLanguage($this->input->post('language'));
+			$this->user->setPostCode($this->input->post('post_code'));
+
+			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));
+			$this->user->setCountry($country);
+
+			$this->em->persist($this->user);
+			$this->em->flush();
+		}
 
 		$this->template->title(lang('settings'))
 			->build('account/settings', array(
@@ -92,9 +113,8 @@ class Account extends WL_Controller {
 		$this->form_validation->set_rules('username', 'a username', 'required|alpha_dash|max_length[32]|callback__unique_username');
 		$this->form_validation->set_rules('password', 'a password', 'required|min_length[6]|matches[password_confirm]');
 		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
-		$this->form_validation->set_rules('country', 'country', 'required|alpha|exact_length[2]');
+		$this->form_validation->set_rules('country', 'country', 'required|callback__valid_country');
 		$this->form_validation->set_rules('post_code', 'post code', 'max_length[15]');
-
 		$this->form_validation->set_message('matches', "The passwords don't match.");
 
 		if ($this->form_validation->run() === FALSE)
@@ -126,7 +146,7 @@ class Account extends WL_Controller {
 			$user->setCountry($country);
 
 			// Set the User's group
-			$group = $this->em->getRepository('models\UserGroup')->findOneByName('User');
+			$group = $this->em->getRepository('models\UserGroup')->findOneByName($this->config->item('default_user_group'));
 			$group->getUsers()->add($user);
 			$user->setGroup($group);
 
@@ -164,9 +184,9 @@ class Account extends WL_Controller {
 	}
 
 	/**
-	 * Validate an Email
+	 * Check that the email is not already in use
 	 *
-	 * Check if a User with that email already exists
+	 * If a user is currently logged in, we don't consider their own email to be in use
 	 *
 	 * @access	public
 	 * @param	string	$email
@@ -176,14 +196,54 @@ class Account extends WL_Controller {
 	{
 		$user = $this->em->getRepository('models\User')->findOneByEmail($email);
 
-		if ( ! $user)
+		if ( ! $user || $this->authenticated && $this->user->getEmail() == $user->getEmail())
 		{
-			// The email is free
 			return TRUE;
 		}
 
+		// The email is already in use
 		$this->form_validation->set_message('_unique_email', 'That email is already in use.');
 		return FALSE;
+	}
+
+	/**
+	 * Check that the language specified exists in the available_languages config item
+	 *
+	 * @access	public
+	 * @param	string	$language
+	 * @return	bool
+	 */
+	public function _valid_language($language)
+	{
+		if ( ! array_key_exists($language, $this->config->item('available_languages')))
+		{
+			// Invalid language specified
+			$this->form_validation->set_message('_valid_country', 'Please select a language from the drop-down list.');
+			return FALSE;
+		}
+
+		return TRUE;
+	}
+
+	/**
+	 * Check that the specified country exists in the DB
+	 *
+	 * @access	public
+	 * @param	string	$country
+	 * @return	bool
+	 */
+	public function _valid_country($country)
+	{
+		$country = $this->em->getRepository('models\Country')->find($country);
+
+		if ( ! $country)
+		{
+			// The country doesn't exist
+			$this->form_validation->set_message('_valid_country', 'Please select a country from the drop-down list.');
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 }
 

@@ -1,4 +1,4 @@
-<p>Don't have an account? <?=anchor('account/signup', 'Sign Up')?></p>
+<p>Don't have an account? <?=anchor('account/signup', lang('sign_up'))?></p>
 
 <?=form_open(($return = $this->input->get('return')) ? "account/login?return={$return}" : 'account/login', 'class="tabbed"')?>
 	<?php if ($validate && ! $login): ?>
