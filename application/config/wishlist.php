@@ -2,13 +2,16 @@
 
 /*
 |--------------------------------------------------------------------------
-| Default User Page
+| User Defaults
 |--------------------------------------------------------------------------
 |
-| This is the page that users will be redirected to after logging in.
+| default_user_page - the page that users will be redirected to after logging in.
+| default_user_group - the default group that new users will belong to (must be
+|	the name of a user_group record, e.g. 'User')
 |
 */
 $config['default_user_page'] = 'wishlists';
+$config['default_user_group'] = 'User';
 
 /*
 |--------------------------------------------------------------------------
