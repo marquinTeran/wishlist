@@ -46,9 +46,10 @@
 	<legend><?=lang('default_wishlist_settings')?></legend>
 
 	<div>
-		<label for="public">Visible t</label>
+		<label for="visibility">Blah</label>
 		<select name="visibility" id="visibility">
-			<option value=""
+			<option value="public">Public - Visible to anybody</option>
+			<option value="private">Private - Only visible to you</option>
 		</select>
 	</div>
 </fieldset>
