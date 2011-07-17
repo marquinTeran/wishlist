@@ -34,18 +34,6 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
         return parent::setPassword($password);
     }
 
-    public function setGroup(\models\UserGroup $group)
-    {
-        $this->__load();
-        return parent::setGroup($group);
-    }
-
-    public function getGroup()
-    {
-        $this->__load();
-        return parent::getGroup();
-    }
-
     public function authenticate()
     {
         $this->__load();
@@ -76,6 +64,18 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
         return parent::getUsername();
     }
 
+    public function setPostCode($post_code)
+    {
+        $this->__load();
+        return parent::setPostCode($post_code);
+    }
+
+    public function getPostCode()
+    {
+        $this->__load();
+        return parent::getPostCode();
+    }
+
     public function getPassword()
     {
         $this->__load();
@@ -104,6 +104,30 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
     {
         $this->__load();
         return parent::getCountry();
+    }
+
+    public function setLanguage($language)
+    {
+        $this->__load();
+        return parent::setLanguage($language);
+    }
+
+    public function getLanguage()
+    {
+        $this->__load();
+        return parent::getLanguage();
+    }
+
+    public function setGroup(\models\UserGroup $group)
+    {
+        $this->__load();
+        return parent::setGroup($group);
+    }
+
+    public function getGroup()
+    {
+        $this->__load();
+        return parent::getGroup();
     }
 
     public function setUserGroup(\models\UserGroup $userGroup)
@@ -145,7 +169,7 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'username', 'password', 'email', 'country', 'user_group', 'wishlists');
+        return array('__isInitialized__', 'id', 'username', 'password', 'email', 'country', 'language', 'post_code', 'user_group', 'wishlists');
     }
 
     public function __clone()

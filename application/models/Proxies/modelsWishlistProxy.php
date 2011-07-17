@@ -15,7 +15,8 @@ class modelsWishlistProxy extends \models\Wishlist implements \Doctrine\ORM\Prox
         $this->_entityPersister = $entityPersister;
         $this->_identifier = $identifier;
     }
-    private function _load()
+    /** @private */
+    public function __load()
     {
         if (!$this->__isInitialized__ && $this->_entityPersister) {
             $this->__isInitialized__ = true;
@@ -25,84 +26,102 @@ class modelsWishlistProxy extends \models\Wishlist implements \Doctrine\ORM\Prox
             unset($this->_entityPersister, $this->_identifier);
         }
     }
-
     
+    
+    public function onPrePersist()
+    {
+        $this->__load();
+        return parent::onPrePersist();
+    }
+
     public function getItems()
     {
-        $this->_load();
+        $this->__load();
         return parent::getItems();
     }
 
     public function getId()
     {
-        $this->_load();
+        $this->__load();
         return parent::getId();
     }
 
     public function setName($name)
     {
-        $this->_load();
+        $this->__load();
         return parent::setName($name);
     }
 
     public function getName()
     {
-        $this->_load();
+        $this->__load();
         return parent::getName();
     }
 
     public function setUrlTitle($urlTitle)
     {
-        $this->_load();
+        $this->__load();
         return parent::setUrlTitle($urlTitle);
     }
 
     public function getUrlTitle()
     {
-        $this->_load();
+        $this->__load();
         return parent::getUrlTitle();
+    }
+
+    public function setPublic($public)
+    {
+        $this->__load();
+        return parent::setPublic($public);
+    }
+
+    public function getPublic()
+    {
+        $this->__load();
+        return parent::getPublic();
     }
 
     public function setUser(\models\User $user)
     {
-        $this->_load();
+        $this->__load();
         return parent::setUser($user);
     }
 
     public function getUser()
     {
-        $this->_load();
+        $this->__load();
         return parent::getUser();
     }
 
     public function addWishlistItems(\models\WishlistItem $wishlistItems)
     {
-        $this->_load();
+        $this->__load();
         return parent::addWishlistItems($wishlistItems);
     }
 
     public function getWishlistItems()
     {
-        $this->_load();
+        $this->__load();
         return parent::getWishlistItems();
     }
 
     public function toArray()
     {
-        $this->_load();
+        $this->__load();
         return parent::toArray();
     }
 
     public function __call($method, $args)
     {
-        $this->_load();
+        $this->__load();
         return parent::__call($method, $args);
     }
 
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'url_title', 'user', 'wishlist_items');
+        return array('__isInitialized__', 'id', 'name', 'url_title', 'public', 'user', 'wishlist_items');
     }
 
     public function __clone()
