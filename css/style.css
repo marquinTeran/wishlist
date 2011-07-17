@@ -1,67 +1,6 @@
-/* BEGIN RESET STYLES */
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, figure, footer, header, hgroup, menu, nav, section, menu,
-time, mark, audio, video {
-margin:0;
-padding:0;
-border:0;
-outline:0;
-font-size:100%;
-vertical-align:baseline;
-background:transparent;
-}
-
-html { overflow-y: scroll; -webkit-font-smoothing: antialiased; }
-body { font:13px sans-serif; *font-size:small; *font:x-small; line-height:1.22; }
-table { font-size:inherit; font:100%; }
-select, input, button, .button, textarea { font:99% sans-serif; }
-
-input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
-.ie6 input { vertical-align: text-bottom; }
-label, input, button, select, textarea { cursor: pointer; }
-option { cursor: default; }
-.ie7 img { -ms-interpolation-mode: bicubic; }
-
-article, aside, figure, footer, header,
-hgroup, nav, section { display:block; }
-
-nav ul { list-style:none; }
-
-blockquote, q { quotes:none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after { content:''; content:none; }
-
-a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
-
-ins { background-color:#ff9; color:#000; text-decoration:none; }
-
-mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
-
-del { text-decoration: line-through; }
-
-abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; }
-
-/* tables still need cellspacing="0" in the markup */
-table { border-collapse:collapse; border-spacing:0; }
-
-hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
-
-input, select { vertical-align:middle; }
-/* END RESET STYLES */
-
 /* HTML Elements */
 body {
-	margin: 20px auto;
+	margin: 0 auto;
 	width: 80%;
 }
 
@@ -80,6 +19,10 @@ ul, ol { list-style-position: inside; }
 /* End HTML Elements */
 
 /* Containers */
+#heading {
+	margin-top: 20px;
+}
+
 #container {
 	margin-top: 12px;
 }
@@ -92,11 +35,6 @@ ul, ol { list-style-position: inside; }
 	float: right;
 }
 
-#status {
-	clear: left;
-	margin-top: 12px;
-}
-
 #content {
 	clear: both;
 	padding-top: 22px;
@@ -106,6 +44,27 @@ ul, ol { list-style-position: inside; }
 	margin-top: 36px;
 }
 /* End Containers */
+
+/* Status Messages */
+#status span {
+	padding: 8px 12px;
+	display: block;
+	border: 1px solid #CACACA;
+	border-top: none;
+}
+
+#status .error {
+	background-color: #D84743;
+	color: #FEE;
+	border-color: #911D1B;
+}
+
+#status .success {
+	background-color: #96ED89;
+	color: #151;
+	border-color: #45BF55;
+}
+/* End Status Messages */
 
 /* Navigation & Menus */
 #navigation li, #account-menu li {
@@ -134,7 +93,7 @@ form {
 fieldset {
 	border: 1px solid #BFBFBF;
 	padding: 8px;
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 }
 
 legend {
@@ -145,18 +104,18 @@ legend {
 }
 
 label {
-	padding: 4px 0;
+	padding: 3px 0;
 }
 
-input, textarea, select, button, .submit, .button, .button:visited {
+input, textarea, select {
 	display: inline-block;
 	width: auto;
 	height: auto;
-	padding: 4px 8px;
-	-moz-border-radius: 6px;
+	padding: 3px 6px;
 	border: 1px solid #BFBFBF;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 	box-shadow: 0 1px 2px rgba(0,0,0,0.6);
@@ -167,21 +126,6 @@ input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:f
 	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.6);
 	box-shadow: 0 1px 4px rgba(0,0,0,0.6);
-}
-
-button, .submit, .button, .button:visited {
-	vertical-align: middle;
-	background: #34758F;
-	color: #FFF;
-	text-decoration: none;
-	text-shadow: -1px -1px 4px rgba(0,0,0,0.25);
-	position: relative;
-	cursor: pointer;
-}
-
-button:hover, .submit:hover, .button:hover {
-	text-shadow: -1px -1px 2px rgba(0,0,0,0.5);
-	background: #38A;
 }
 
 form.tabbed label {
@@ -227,6 +171,12 @@ form span.note {
 	vertical-align: middle;
 }
 /* End Form Elements & Buttons */
+
+/* Wishlists */
+#recommendations li img {
+	width: 50px;
+}
+/* End Wishlists */
 
 /* Ajax-Editable Form Elements */
 .plain-text {

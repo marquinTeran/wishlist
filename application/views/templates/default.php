@@ -8,12 +8,18 @@
 	<title><?=$template->title?></title>
 
 	<link rel="shortcut icon" href="<?=base_url()?>favicon.png">
-	<link rel="stylesheet" type="text/css" media="all" href="<?=base_url()?>serve/?f=css/style.css">
+	<link rel="stylesheet" type="text/css" media="all" href="<?=base_url()?>serve/?b=css&f=reset.css,style.css,buttons.css">
 </head>
 <?php flush(); ?>
 
 <body>
 <div id="wrapper">
+	<?php if ($this->session->flashdata('status')): ?>
+	<div id="status">
+		<?=$this->session->flashdata('status')?>
+	</div>
+	<?php endif; ?>
+
 	<div id="heading">
 		<h1><?=anchor('/', 'Wishlist')?></h1>
 	</div>
@@ -27,12 +33,6 @@
 			<?=$account_menu?>
 		</div>
 
-		<?php if ($this->session->flashdata('status')): ?>
-		<div id="status">
-			<?=$this->session->flashdata('status')?>
-		</div>
-		<?php endif; ?>
-
 		<div id="content">
 			<h2><?=$template->long_title?></h2>
 			<?=$template->content?>
@@ -42,11 +42,7 @@
 	<div id="footer">
 		<div id="benchmark">Page generated in <?=$this->benchmark->elapsed_time()?> seconds</div>
 
-		<ul id="change-language">
-			<?php foreach ($available_languages as $iso => $language): ?>
-				<li><?=anchor('set-language/' . $iso . '?return=' . uri_string(), $language['name'])?></li>
-			<?php endforeach; ?>
-		</ul>
+		<div id="copy-notice">Wishlist &copy; <?=date('Y')?></div>
 	</div>
 </div>
 </body>
