@@ -9,7 +9,7 @@
 $lang['log_in']			= "Connexion";
 $lang['log_out']		= "Déconnexion";
 $lang['sign_up']		= "Inscription";
-$lang['dashboard']		= "Dashboard";
+$lang['account']		= "Compte";
 $lang['settings']		= "Réglages";
 $lang['wishlists']		= "Wishlists";
 $lang['cancel']			= "Annuler";
