@@ -5,7 +5,7 @@
 <?php else: ?>
 	<ul>
 	<?php foreach($wishlists as $wishlist): ?>
-		<li><?=anchor("wishlists/{$wishlist->getId()}", $wishlist->getName())?></li>
+		<li><?=anchor("wishlists/{$wishlist->getId()}", "{$wishlist->getName()} (" . count($wishlist->getItems()) . " items)")?></li>
 	<?php endforeach; ?>
 	</ul>
 <?php endif; ?>
