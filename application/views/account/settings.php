@@ -1,6 +1,6 @@
 <?=form_open('account/settings', 'method="post" class="tabbed')?>
 <fieldset>
-	<legend>Account Information</legend>
+	<legend><?=lang('account_information')?></legend>
 
 	<div>
 		<label for="username">Username</label>
@@ -43,28 +43,18 @@
 </fieldset>
 
 <fieldset>
-	<legend>Change Password</legend>
+	<legend><?=lang('default_wishlist_settings')?></legend>
 
 	<div>
-		<label for="password">Current Password</label>
-		<input type="password" name="password" id="password" />
-		<?=form_error('password')?>
-	</div>
-
-	<div>
-		<label for="new_password">New Password</label>
-		<input type="new_password" name="new_password" id="new_password" />
-		<?=form_error('new_password')?>
-	</div>
-
-	<div>
-		<label for="password_confirm">Confirm Password</label>
-		<input type="password" name="password_confirm" id="password_confirm" />
+		<label for="public">Visible t</label>
+		<select name="visibility" id="visibility">
+			<option value=""
+		</select>
 	</div>
 </fieldset>
 
 <div id="controls">
-	<?=anchor('account', lang('cancel'), 'class="button"')?>
-	<button type="submit" name="save_settings" id="save_settings" class="button">Save Settings</button>
+	<?=anchor('account', lang('cancel'), 'class="big negative button"')?>
+	<button type="submit" name="save_settings" id="save_settings" class="big button">Save Settings</button>
 </div>
 <?=form_close()?>

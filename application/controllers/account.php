@@ -3,13 +3,23 @@
 class Account extends WL_Controller {
 
 	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->language('account');
+	}
+
+	/**
 	 * Account Index
 	 */
 	public function index()
 	{
 		$this->auth->require_login();
 
-		$this->template->title(lang('dashboard'))
+		$this->template->title(lang('account'))
 			->build('account/index', array(
 				'user' => $this->user
 			));
@@ -22,12 +32,10 @@ class Account extends WL_Controller {
 	{
 		$this->auth->require_login();
 
-		$this->form_validation->set_rules('password', 'a password', 'min_length[6]|matches[password_confirm]');
-		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
-		$this->form_validation->set_rules('country', 'country', 'required|callback__valid_country');
-		$this->form_validation->set_rules('language', 'language', 'required|callback__valid_language');
-		$this->form_validation->set_rules('post_code', 'post code', 'max_length[15]');
-		$this->form_validation->set_message('matches', "The passwords don't match.");
+		$this->form_validation->set_rules('email', lang('field_email'), 'required|valid_email|callback__unique_email');
+		$this->form_validation->set_rules('country', lang('field_country'), 'callback__valid_country');
+		$this->form_validation->set_rules('language', lang('field_language'), 'callback__valid_language');
+		$this->form_validation->set_rules('post_code', lang('field_post_code'), 'max_length[15]');
 
 		if ($this->form_validation->run())
 		{
@@ -41,6 +49,10 @@ class Account extends WL_Controller {
 
 			$this->em->persist($this->user);
 			$this->em->flush();
+
+			// Set a success message and redirect the user
+			set_status(lang('settings_saved'), 'success');
+			redirect('account/settings');
 		}
 
 		$this->template->title(lang('settings'))
@@ -52,13 +64,42 @@ class Account extends WL_Controller {
 	}
 
 	/**
+	 * Change the user's password
+	 */
+	public function change_password()
+	{
+		$this->auth->require_login();
+
+		$this->form_validation->set_rules('password', lang('field_current_password'), 'required|callback__correct_password');
+		$this->form_validation->set_rules('new_password', lang('field_new_password'), 'min_length[6]|matches[password_confirm]');
+		$this->form_validation->set_message('matches', lang('validation_matches'));
+
+		if ($this->form_validation->run())
+		{
+			// Update the user's settings
+			$this->user->setPassword($this->input->post('new_password'));
+			$this->em->persist($this->user);
+			$this->em->flush();
+
+			// Set a success message and redirect the user
+			set_status(lang('password_changed'), 'success');
+			redirect('account');
+		}
+
+		$this->template->title(lang('change_password'))
+			->build('account/change-password', array(
+				'user' => $this->user
+			));
+	}
+
+	/**
 	 * Log into the system
 	 */
 	public function login()
 	{
 		// Set up form validation and run it
-		$this->form_validation->set_rules('identifier', 'username or email address', 'required');
-		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('identifier', lang('field_identifier'), 'required');
+		$this->form_validation->set_rules('password', lang('field_password_login'), 'required');
 		$validate = $this->form_validation->run();
 
 		// Attempt to log in
@@ -110,12 +151,12 @@ class Account extends WL_Controller {
 			redirect('account');
 		}
 
-		$this->form_validation->set_rules('username', 'a username', 'required|alpha_dash|max_length[32]|callback__unique_username');
-		$this->form_validation->set_rules('password', 'a password', 'required|min_length[6]|matches[password_confirm]');
-		$this->form_validation->set_rules('email', 'your email address', 'required|valid_email|callback__unique_email');
-		$this->form_validation->set_rules('country', 'country', 'required|callback__valid_country');
-		$this->form_validation->set_rules('post_code', 'post code', 'max_length[15]');
-		$this->form_validation->set_message('matches', "The passwords don't match.");
+		$this->form_validation->set_rules('username', lang('field_username'), 'required|alpha_dash|max_length[32]|callback__unique_username');
+		$this->form_validation->set_rules('password', lang('field_password'), 'required|min_length[6]|matches[password_confirm]');
+		$this->form_validation->set_rules('email', lang('field_email'), 'required|valid_email|callback__unique_email');
+		$this->form_validation->set_rules('country', lang('field_country'), 'callback__valid_country');
+		$this->form_validation->set_rules('post_code', lang('field_post_code'), 'max_length[15]');
+		$this->form_validation->set_message('matches', lang('validation_matches'));
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -244,6 +285,24 @@ class Account extends WL_Controller {
 		}
 
 		return TRUE;
+	}
+
+	/**
+	 * Check that the password provided is the current user's password
+	 *
+	 * @param	string	$password
+	 * @return 	bool
+	 */
+	public function _correct_password($password)
+	{
+		if ($this->authenticated && \models\User::encryptPassword($password) == $this->user->getPassword())
+		{
+			return TRUE;
+		}
+
+		// Password is incorrect
+		$this->form_validation->set_message('_correct_password', lang('validation_current_password'));
+		return FALSE;
 	}
 }
 
