@@ -43,10 +43,6 @@ $config['available_languages'] = array(
 	'en' => array(
 		'name' => 'English',
 		'folder' => 'english'
-	),
-	'fr' => array(
-		'name' => 'Français',
-		'folder' => 'french'
 	)
 );
 
