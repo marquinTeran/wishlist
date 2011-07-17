@@ -64,20 +64,18 @@ class Wishlists extends WL_Controller {
 			show_404();
 		}
 
-		if ($wishlist->getUser() === $this->user)
+		$wishlist_items = array();
+
+		foreach ($wishlist->getItems() as $wishlist_item)
 		{
-			$this->load->library('ebay');
-			$wishlist_items = '';
+			$wishlist_items[] = $this->load->view('wishlists/wishlist-item', array(
+				'wishlist_item' => $wishlist_item
+			), TRUE);
+		}
 
-			foreach ($wishlist->getItems() as $wishlist_item)
-			{
-				$wishlist_item->setRecommendedItems($this->ebay->get_recommendations($wishlist_item->getName()));
-
-				$wishlist_items .= $this->load->view('wishlists/wishlist-item', array(
-					'wishlist_item' => $wishlist_item
-				), TRUE);
-			}
-
+		if ($wishlist->getUser() == $this->user)
+		{
+			// Wishlist belongs to this user
 			$this->template->title($wishlist->getName())
 				->addPartial('new_item_form', 'wishlists/add-wishlist-item')
 				->addScript('js/view-wishlist.js')
@@ -86,9 +84,15 @@ class Wishlists extends WL_Controller {
 					'wishlist_items' => $wishlist_items
 				));
 		}
+		elseif ($this->authenticated)
+		{
+			// Wishlist belongs to another user
+			permission_error();
+		}
 		else
 		{
-			permission_error();
+			// User is not logged in and wishlist is not public
+			$this->auth->require_login();
 		}
 	}
 
