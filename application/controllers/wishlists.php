@@ -32,10 +32,10 @@ class Wishlists extends WL_Controller {
 			if ($this->form_validation->run() === TRUE)
 			{
 				// Create the new Wishlist
-				$wishlist = new models\Wishlist;
+				$wishlist = new \models\Wishlist;
 				$wishlist->setName($wishlist_name);
 				$wishlist->setUser($this->user);
-				$wishlist->setPublic(TRUE); // TODO: Use the user's settings
+				$wishlist->setPublic($this->user->getSetting('default_public_wishlist')->getValue());
 
 				$this->em->persist($wishlist);
 				$this->em->flush();
@@ -59,7 +59,7 @@ class Wishlists extends WL_Controller {
 	 */
 	public function view($wishlist_id = NULL)
 	{
-		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('models\Wishlist')->find($wishlist_id))
+		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('\models\Wishlist')->find($wishlist_id))
 		{
 			show_404();
 		}
@@ -104,7 +104,7 @@ class Wishlists extends WL_Controller {
 	 */
 	public function add_item($wishlist_id = NULL)
 	{
-		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('models\Wishlist')->find($wishlist_id))
+		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('\models\Wishlist')->find($wishlist_id))
 		{
 			show_404();
 		}
@@ -116,7 +116,7 @@ class Wishlists extends WL_Controller {
 			if ($this->form_validation->run() === TRUE)
 			{
 				// Create the new WishlistItem
-				$item = new models\WishlistItem;
+				$item = new \models\WishlistItem;
 				$item->setName($item_name);
 				$item->setWishlist($wishlist);
 
@@ -160,7 +160,7 @@ class Wishlists extends WL_Controller {
 	 */
 	public function remove_item($item_id = NULL)
 	{
-		if ( ! $item_id || ! $wishlist_item = $this->em->getRepository('models\WishlistItem')->find($item_id))
+		if ( ! $item_id || ! $wishlist_item = $this->em->getRepository('\models\WishlistItem')->find($item_id))
 		{
 			show_404();
 		}
