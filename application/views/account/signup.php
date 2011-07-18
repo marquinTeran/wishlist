@@ -42,6 +42,6 @@
 </div>
 
 <div id="controls">
-	<button type="submit" name="sign_up" id="sign_up" class="button">Sign Up</button>
+	<button type="submit" name="sign_up" id="sign_up" class="big">Sign Up</button>
 </div>
 <?=form_close()?>
