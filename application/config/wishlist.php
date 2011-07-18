@@ -8,10 +8,17 @@
 | default_user_page - the page that users will be redirected to after logging in.
 | default_user_group - the default group that new users will belong to (must be
 |	the name of a user_group record, e.g. 'User')
+| default_user_settings - an array of setting names, their default values, and data type
 |
 */
 $config['default_user_page'] = 'wishlists';
 $config['default_user_group'] = 'User';
+$config['default_user_settings'] = array(
+	'default_public_wishlist' => array(
+		'type' => 'boolean',
+		'value' => TRUE
+	)
+);
 
 /*
 |--------------------------------------------------------------------------
