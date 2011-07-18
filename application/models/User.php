@@ -60,9 +60,14 @@ class User extends BaseModel
 	private $user_group;
 
     /**
-     * @OneToMany(targetEntity="Wishlist", mappedBy="user")
+     * @OneToMany(targetEntity="Wishlist", mappedBy="user", cascade={"persist", "remove"})
      */
     private $wishlists;
+
+	/**
+	 * @OneToMany(targetEntity="UserSetting", mappedBy="user", cascade={"persist", "remove"})
+	 */
+	private $settings;
 
     /**
      * Constructor
@@ -72,6 +77,7 @@ class User extends BaseModel
         parent::__construct();
 
         $this->wishlists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->settings = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 	/**
@@ -126,7 +132,7 @@ class User extends BaseModel
         $CI =& get_instance();
 
 		//Find the Admin level
-		$admin = $CI->em->getRepository('models\UserGroup')->findOneByName('Admin');
+		$admin = $CI->em->getRepository('\models\UserGroup')->findOneByName('Admin');
 
 		if ($this->getUserGroup()->getLevel() >= $admin->getLevel())
 		{
@@ -335,7 +341,7 @@ class User extends BaseModel
     /**
      * Add wishlists
      *
-     * @param	models\Wishlist 	$wishlists
+     * @param	models\Wishlist 	$wishlist
      * @return	models\User
      */
     public function addWishlist(\models\Wishlist $wishlist)
@@ -353,4 +359,42 @@ class User extends BaseModel
     {
         return $this->wishlists;
     }
+
+    /**
+     * Add settings
+     *
+     * @param	models\UserSetting 	$setting
+     * @return	models\User
+     */
+	public function addSetting(\models\UserSetting $setting)
+	{
+        $this->settings[] = $setting;
+        return $this;
+    }
+
+    /**
+     * Get all settings
+     *
+     * @return	Doctrine\Common\Collections\Collection $settings
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+	/**
+	 * Get a single setting
+	 *
+	 * @param	string	$setting_name
+	 * @return	mixed
+	 */
+	public function getSetting($setting_name)
+	{
+		$CI =& get_instance();
+
+		return $CI->em->getRepository('models\UserSetting')->findOneBy(array(
+			'user' => $this->getId(),
+			'name' => $setting_name
+		));
+	}
 }
