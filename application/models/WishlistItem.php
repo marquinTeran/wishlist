@@ -111,6 +111,8 @@ class WishlistItem extends BaseModel
     public function setWishlist(\models\Wishlist $wishlist)
     {
         $this->wishlist = $wishlist;
+		$wishlist->getWishlistItems()->add($this);
+
         return $this;
     }
 
