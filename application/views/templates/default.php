@@ -9,6 +9,7 @@
 
 	<link rel="shortcut icon" href="<?=base_url()?>favicon.png">
 	<link rel="stylesheet" type="text/css" media="all" href="<?=base_url()?>serve/?b=css&f=reset.css,style.css,buttons.css">
+	<link href="http://fonts.googleapis.com/css?family=Nixie+One&v2" rel="stylesheet" type="text/css">
 </head>
 <?php flush(); ?>
 

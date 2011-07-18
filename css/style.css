@@ -2,13 +2,29 @@
 body {
 	margin: 0 auto;
 	width: 80%;
+	color: #333;
 }
 
-h1, h2, h3, h4 { font-family: Helvetica, Verdana, Arial, sans-serif; }
-h1 { font-size: 2em; }
-h2 { font-size: 1.6em; }
-h3 { font-size: 1.3em; }
+a {
+	color: #34758F;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2D7DC5;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Nixie One', Helvetica, Arial, sans-serif; }
+h1 { font-size: 2.4em; }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.2em; }
 h4 { font-size: 1.1em; }
+h5 { font-size: 1em; }
+
+h1 a, h2 a {
+	text-decoration: none;
+	color: inherit;
+}
 
 p {
 	line-height: 14px;
@@ -24,7 +40,7 @@ ul, ol { list-style-position: inside; }
 }
 
 #container {
-	margin-top: 12px;
+	margin-top: 24px;
 }
 
 #navigation {
@@ -67,6 +83,10 @@ ul, ol { list-style-position: inside; }
 /* End Status Messages */
 
 /* Navigation & Menus */
+#navigation a {
+	font-size: 1.2em;
+}
+
 #navigation li, #account-menu li {
 	float: left;
 	list-style: none;
