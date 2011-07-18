@@ -48,13 +48,13 @@ class Authentication {
 	 * is not authenticated, it will return FALSE.
 	 *
 	 * @access	public
-	 * @return	models\User|bool
+	 * @return	\models\User|bool
 	 */
 	public function getUser()
 	{
 		if ($this->authenticated())
 		{
-			return $this->CI->em->getRepository('models\User')->find($this->user_id);
+			return $this->CI->em->getRepository('\models\User')->find($this->user_id);
 		}
 
 		return FALSE;
@@ -67,7 +67,7 @@ class Authentication {
 	 * Also store a logged_in flag, and the user_id for extra protection against tampering
 	 *
 	 * @access	public
-	 * @param   models\User $user
+	 * @param   \models\User $user
 	 * @return	void
 	 */
 	public function authenticate($user)
@@ -113,14 +113,14 @@ class Authentication {
 	 */
 	public function login($identifier, $password)
 	{
-		$user = models\User::findUser($identifier);
+		$user = \models\User::findUser($identifier);
 
 		if ( ! $user)
 		{
 			return FALSE; //User doesn't exist
 		}
 
-		if (models\User::encryptPassword($password) != $user->getPassword())
+		if (\models\User::encryptPassword($password) != $user->getPassword())
 		{
 			return FALSE; //Incorrect password
 		}
