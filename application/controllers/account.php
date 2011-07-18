@@ -44,8 +44,16 @@ class Account extends WL_Controller {
 			$this->user->setLanguage($this->input->post('language'));
 			$this->user->setPostCode($this->input->post('post_code'));
 
-			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));
+			// Find the selected country
+			$country = $this->em->getRepository('\models\Country')->find($this->input->post('country'));
 			$this->user->setCountry($country);
+
+			// Update UserSettings
+			foreach (array('default_public_wishlist') as $setting_name)
+			{
+				$setting = $this->user->getSetting($setting_name);
+				$setting->setValue($this->input->post($setting_name));
+			}
 
 			$this->em->persist($this->user);
 			$this->em->flush();
@@ -58,7 +66,7 @@ class Account extends WL_Controller {
 		$this->template->title(lang('settings'))
 			->build('account/settings', array(
 				'user' => $this->user,
-				'countries' => $this->em->getRepository('models\Country')->getAllCountries(),
+				'countries' => $this->em->getRepository('\models\Country')->getAllCountries(),
 				'languages' => $this->config->item('available_languages')
 			));
 	}
@@ -165,13 +173,13 @@ class Account extends WL_Controller {
 				 ->unsetVar('account_menu')
 				 ->build('account/signup', array(
 				 	'selected_country' => ! $this->input->post('country') ? $this->config->item('default_country') : $this->input->post('country'),
-				 	'countries' => $this->em->getRepository('models\Country')->getAllCountries()
+				 	'countries' => $this->em->getRepository('\models\Country')->getAllCountries()
 				 ));
 		}
 		else
 		{
 			// Create the new user
-			$user = new models\User;
+			$user = new \models\User;
 			$user->setUsername($this->input->post('username'));
 			$user->setPassword($this->input->post('password'));
 			$user->setEmail($this->input->post('email'));
@@ -183,13 +191,24 @@ class Account extends WL_Controller {
 			$user->setLanguage($language_cookie ? $language_cookie : $default_language);
 
 			// Set the User's country
-			$country = $this->em->getRepository('models\Country')->find($this->input->post('country'));
+			$country = $this->em->getRepository('\models\Country')->find($this->input->post('country'));
 			$user->setCountry($country);
 
 			// Set the User's group
-			$group = $this->em->getRepository('models\UserGroup')->findOneByName($this->config->item('default_user_group'));
-			$group->getUsers()->add($user);
+			$group = $this->em->getRepository('\models\UserGroup')->findOneByName($this->config->item('default_user_group'));
 			$user->setGroup($group);
+
+			// Create the User's default settings
+			$default_settings = $this->config->item('default_user_settings');
+
+			foreach ($default_settings as $setting_name => $setting_data)
+			{
+				$setting = new \models\UserSetting;
+				$setting->setName($setting_name);
+				$setting->setType($setting_data['type']);
+				$setting->setValue($setting_data['value']);
+				$setting->setUser($user);
+			}
 
 			$this->em->persist($user);
 			$this->em->flush();
@@ -212,7 +231,7 @@ class Account extends WL_Controller {
 	 */
 	public function _unique_username($username)
 	{
-		$user = $this->em->getRepository('models\User')->findOneByUsername($username);
+		$user = $this->em->getRepository('\models\User')->findOneByUsername($username);
 
 		if ( ! $user)
 		{
@@ -235,7 +254,7 @@ class Account extends WL_Controller {
 	 */
 	public function _unique_email($email)
 	{
-		$user = $this->em->getRepository('models\User')->findOneByEmail($email);
+		$user = $this->em->getRepository('\models\User')->findOneByEmail($email);
 
 		if ( ! $user || $this->authenticated && $this->user->getEmail() == $user->getEmail())
 		{
@@ -275,7 +294,7 @@ class Account extends WL_Controller {
 	 */
 	public function _valid_country($country)
 	{
-		$country = $this->em->getRepository('models\Country')->find($country);
+		$country = $this->em->getRepository('\models\Country')->find($country);
 
 		if ( ! $country)
 		{

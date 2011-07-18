@@ -46,10 +46,10 @@
 	<legend><?=lang('default_wishlist_settings')?></legend>
 
 	<div>
-		<label for="visibility">Blah</label>
-		<select name="visibility" id="visibility">
-			<option value="public">Public - Visible to anybody</option>
-			<option value="private">Private - Only visible to you</option>
+		<label for="default_public_wishlist">Wishlist visibility</label>
+		<select name="default_public_wishlist" id="default_public_wishlist">
+			<option value="1">Public - Anybody can view your wishlists</option>
+			<option value="0">Private - Only you can view your wishlists</option>
 		</select>
 	</div>
 </fieldset>
