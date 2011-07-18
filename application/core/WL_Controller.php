@@ -55,9 +55,8 @@ class WL_Controller extends CI_Controller {
 		// Configure some libraries
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
 
-		if ($this->authenticated = $this->auth->authenticated())
+		if ($this->authenticated = $this->auth->authenticated() && $this->user = $this->auth->getUser())
 		{
-			$this->user = $this->auth->getUser();
 			$account_menu = 'navigation/user-menu';
 
 			// Set the site language to the user's language
