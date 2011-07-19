@@ -9,7 +9,7 @@ class About extends WL_Controller {
 	 */
 	public function index()
 	{
-		$this->template->title('Wishlist')
+		$this->template->title('Welcome')
 			->build('about/index');
 	}
 
