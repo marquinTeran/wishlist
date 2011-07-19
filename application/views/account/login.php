@@ -1,11 +1,11 @@
 <p>Don't have an account? <?=anchor('account/signup', lang('sign_up'))?></p>
 
-<?=form_open(($return = $this->input->get('return')) ? "account/login?return={$return}" : 'account/login', 'class="tabbed"')?>
-	<?php if ($validate && ! $login): ?>
-		<div class="error">The username / email and password you entered were incorrect.</div>
-	<?php endif; ?>
+<?php if ($validate && ! $login): ?>
+	<div class="error">The username / email and password you entered were incorrect.</div>
+<?php endif; ?>
 
-	<div>
+<?=form_open(($return = $this->input->get('return')) ? "account/login?return={$return}" : 'account/login', 'class="tabbed"')?>
+<div>
 		<label for="identifier">Username / Email</label>
 		<input type="text" name="identifier" id="identifier" value="<?=set_value('identifier')?>" />
 		<?=form_error('identifier')?>
@@ -18,6 +18,6 @@
 	</div>
 
 	<div id="controls">
-		<button type="submit" name="log-in" id="log-in" class="button">Log In</button>
+		<button type="submit" name="log-in" id="log-in" class="big">Log In</button>
 	</div>
 <?=form_close()?>
