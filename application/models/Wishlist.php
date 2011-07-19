@@ -130,12 +130,22 @@ class Wishlist extends BaseModel
     /**
      * Get public
      *
-     * @return	string $public
+     * @return	bool	$public
      */
     public function getPublic()
     {
         return $this->public;
     }
+
+	/**
+	 * Return TRUE if the wishlist is public (alias for getPublic())
+	 *
+	 * @return	bool	$public
+	 */
+	public function isPublic()
+	{
+		return $this->getPublic();
+	}
 
     /**
      * Set user
