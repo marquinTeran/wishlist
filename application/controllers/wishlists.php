@@ -40,11 +40,11 @@ class Wishlists extends WL_Controller {
 				$this->em->persist($wishlist);
 				$this->em->flush();
 
-				set_status('Woohoo! Your wishlist was created. Why not ' . anchor("wishlists/{$wishlist->getId()}", 'add some things to it') . ' now?', 'success');
+				set_status('Woohoo! Your wish list was created. Why not ' . anchor("wishlists/{$wishlist->getId()}", 'add some things to it') . ' now?', 'success');
 			}
 			else
 			{
-				set_status('Sorry, your wishlist name is too long.', 'error');
+				set_status('Sorry, your wish list name is too long.', 'error');
 			}
 		}
 
@@ -54,10 +54,11 @@ class Wishlists extends WL_Controller {
 	/**
 	 * View a wishlist
 	 *
-	 * @param   int	 $wishlist_id
+	 * @param   int		$wishlist_id
+	 * @param	bool	$public_view	Set to TRUE to force public view
 	 * @return  void
 	 */
-	public function view($wishlist_id = NULL)
+	public function view($wishlist_id = NULL, $public_view = FALSE)
 	{
 		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('\models\Wishlist')->find($wishlist_id))
 		{
@@ -73,27 +74,41 @@ class Wishlists extends WL_Controller {
 			), TRUE);
 		}
 
-		if ($wishlist->getUser() == $this->user)
+		if ($wishlist->getUser() == $this->user && ! $public_view)
 		{
 			// Wishlist belongs to this user
 			$this->template->title($wishlist->getName())
-				->addPartial('new_item_form', 'wishlists/add-wishlist-item')
 				->addScript('js/view-wishlist.js')
 				->build('wishlists/view-owner', array(
 					'wishlist' => $wishlist,
 					'wishlist_items' => $wishlist_items
 				));
 		}
-		elseif ($this->authenticated)
+		elseif ($wishlist->isPublic())
 		{
-			// Wishlist belongs to another user
-			permission_error();
+			// User is not the owner, but this wish list is public
+			$this->template->title($wishlist->getName())
+				->build('wishlists/view-public', array(
+					'wishlist' => $wishlist,
+					'wishlist_items' => $wishlist_items
+				));
 		}
 		else
 		{
 			// User is not logged in and wishlist is not public
-			$this->auth->require_login();
+			permission_error();
 		}
+	}
+
+	/**
+	 * The 'public' view of a wish list
+	 *
+	 * @param	int		$wishlist_id
+	 * @return	void
+	 */
+	public function share($wishlist_id = NULL)
+	{
+		$this->view($wishlist_id, TRUE);
 	}
 
 	/**
@@ -180,6 +195,32 @@ class Wishlists extends WL_Controller {
 			));
 		}
 
+	}
+
+	/**
+	 * Change the settings of a wish list
+	 *
+	 * @param	int		$wishlist_id
+	 * @return	void
+	 */
+	public function settings($wishlist_id = NULL)
+	{
+		if ( ! $wishlist_id || ! $wishlist = $this->em->getRepository('\models\Wishlist')->find($wishlist_id))
+		{
+			show_404();
+		}
+
+		if ( ! $wishlist->getUser()->getId() === $this->user->getId())
+		{
+			permission_error();
+		}
+
+		$wishlist->setPublic($this->input->post('public'));
+
+		$this->em->persist($wishlist);
+		$this->em->flush();
+
+		redirect("wishlists/view/{$wishlist_id}");
 	}
 
 }
