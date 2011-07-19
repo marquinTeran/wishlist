@@ -1,3 +1,3 @@
 <ul>
-	<li><?=anchor('wishlists', 'Wishlists')?></li>
+	<li><?=anchor('wishlists', lang('wishlists'))?></li>
 </ul>
