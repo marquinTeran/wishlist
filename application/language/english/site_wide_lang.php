@@ -12,7 +12,7 @@ $lang['sign_up']			= "Sign Up";
 $lang['account']			= "Account";
 $lang['settings']			= "Account Settings";
 $lang['change_password']	= "Change Password";
-$lang['wishlists']			= "Wishlists";
+$lang['wishlists']			= "My Wish Lists";
 $lang['cancel']				= "Cancel";
 
 
