@@ -1,9 +1,8 @@
 <?php
-use Doctrine\Common\ClassLoader,
-	Doctrine\ORM\Configuration,
-	Doctrine\ORM\EntityManager,
-	Doctrine\Common\Cache\ArrayCache,
-	Doctrine\DBAL\Logging\EchoSQLLogger;
+use Doctrine\ORM\EntityManager,
+	Doctrine\ORM\Configuration;
+
+define('DEBUGGING', FALSE);
 
 class Doctrine {
 
@@ -11,37 +10,54 @@ class Doctrine {
 
 	public function __construct()
 	{
-		// load database configuration from CodeIgniter
-		global $db;
-		require_once APPPATH . 'config/database.php';
+		// load database configuration and custom config from CodeIgniter
+		require APPPATH . 'config/database.php';
 
 		// Set up class loading. You could use different autoloaders, provided by your favorite framework,
 		// if you want to.
 		require_once APPPATH . 'libraries/Doctrine/Common/ClassLoader.php';
 
-		$doctrineClassLoader = new ClassLoader('Doctrine', APPPATH . 'libraries');
+		$doctrineClassLoader = new \Doctrine\Common\ClassLoader('Doctrine', APPPATH . 'libraries');
 		$doctrineClassLoader->register();
-		$entitiesClassLoader = new ClassLoader('models', rtrim(APPPATH, '/'));
+
+		$entitiesClassLoader = new \Doctrine\Common\ClassLoader('models', rtrim(APPPATH, '/'));
 		$entitiesClassLoader->register();
-		$proxiesClassLoader = new ClassLoader('Proxies', APPPATH . 'models');
+
+		$proxiesClassLoader = new \Doctrine\Common\ClassLoader('Proxies', APPPATH . 'models');
 		$proxiesClassLoader->register();
 
-		// Set up caches
+		$symfonyClassLoader = new \Doctrine\Common\ClassLoader('Symfony', APPPATH . 'libraries/Doctrine');
+		$symfonyClassLoader->register();
+
+		// Choose caching method based on application mode
+		if (ENVIRONMENT == 'development') {
+			$cache = new \Doctrine\Common\Cache\ArrayCache;
+		} else {
+			$cache = new \Doctrine\Common\Cache\ApcCache;
+		}
+
+		// Set some configuration options
 		$config = new Configuration;
-		$cache = new ArrayCache;
+
+		// Caching
 		$config->setMetadataCacheImpl($cache);
-		$driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH . 'models/Entities'));
-		$config->setMetadataDriverImpl($driverImpl);
 		$config->setQueryCacheImpl($cache);
 
-		// Proxy configuration
-		$config->setProxyDir(APPPATH . '/models/Proxies');
-		$config->setProxyNamespace('Proxies');
+		// Metadata driver
+		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . 'models');
+		$config->setMetadataDriverImpl($driverImpl);
 
-		// Set up logger
-		// $logger = new EchoSQLLogger;
-		// $config->setSQLLogger($logger);
+		// Proxies
+		$config->setProxyDir(APPPATH . 'models/Proxies');
+		$config->setProxyNamespace('Proxies');
 		$config->setAutoGenerateProxyClasses(TRUE);
+
+		// SQL query logger
+		if (DEBUGGING)
+		{
+			$logger = new \Doctrine\DBAL\Logging\EchoSQLLogger;
+			$config->setSQLLogger($logger);
+		}
 
 		// Database connection information
 		$connectionOptions = array(
