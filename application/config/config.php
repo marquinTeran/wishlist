@@ -247,6 +247,17 @@ $config['encryption_key'] = '2cD6EcnBS1m2YX4kKDI0SnlOjH5JBdMZ';
 $config['sess_cookie_name']		= 'wishlist_session';
 $config['sess_expiration']		= 1209600; // 2 Weeks
 $config['sess_expire_on_close']	= FALSE;
+
+// Don't encrypt the session cookie during development
+if (ENVIRONMENT == 'development')
+{
+	$config['sess_encrypt_cookie']	= FALSE;
+}
+else
+{
+	$config['sess_encrypt_cookie']	= TRUE;
+}
+
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= TRUE;
 $config['sess_table_name']		= 'ci_sessions';
