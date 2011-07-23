@@ -16,27 +16,27 @@ class UserSetting extends BaseModel
 	 * @Column(type="integer", nullable=false)
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @Column(type="string", length=32, nullable=false)
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * @Column(type="string", length=16, nullable=false)
 	 */
-	private $type;
+	protected $type;
 
 	/**
 	 * @Column(type="text", length=512, nullable=true)
 	 */
-	private $value;
+	protected $value;
 
 	/**
 	 * @ManyToOne(targetEntity="User", inversedBy="settings")
 	 */
-	private $user;
+	protected $user;
 
 	 /**
      * Get id

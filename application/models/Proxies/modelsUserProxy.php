@@ -154,6 +154,24 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
         return parent::getWishlists();
     }
 
+    public function addSetting(\models\UserSetting $setting)
+    {
+        $this->__load();
+        return parent::addSetting($setting);
+    }
+
+    public function getSettings()
+    {
+        $this->__load();
+        return parent::getSettings();
+    }
+
+    public function getSetting($setting_name)
+    {
+        $this->__load();
+        return parent::getSetting($setting_name);
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -169,7 +187,7 @@ class modelsUserProxy extends \models\User implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'username', 'password', 'email', 'country', 'language', 'post_code', 'user_group', 'wishlists');
+        return array('__isInitialized__', 'id', 'username', 'password', 'email', 'country', 'language', 'post_code', 'user_group', 'wishlists', 'settings');
     }
 
     public function __clone()

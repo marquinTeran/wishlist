@@ -16,27 +16,27 @@ class WishlistItem extends BaseModel
      * @Id
      * @GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @Column(name="name", type="string", length=16, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @Column(name="sort_order", type="smallint", nullable=true)
      */
-    private $sort_order;
+    protected $sort_order;
 
 	/**
 	 * @ManyToOne(targetEntity="Wishlist", inversedBy="wishlist_items")
 	 */
-	private $wishlist;
+	protected $wishlist;
 
 	/**
 	 * @var array
 	 */
-	private $recommended_items = array();
+	protected $recommended_items = array();
 
 	/**
 	 * Constructor

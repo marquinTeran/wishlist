@@ -18,34 +18,34 @@ class CiSessions
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $sessionId;
+    protected $sessionId;
 
     /**
      * @var string $ipAddress
      *
      * @Column(name="ip_address", type="string", length=16, nullable=false)
      */
-    private $ipAddress;
+    protected $ipAddress;
 
     /**
      * @var string $userAgent
      *
      * @Column(name="user_agent", type="string", length=50, nullable=false)
      */
-    private $userAgent;
+    protected $userAgent;
 
     /**
      * @var integer $lastActivity
      *
      * @Column(name="last_activity", type="integer", nullable=false)
      */
-    private $lastActivity;
+    protected $lastActivity;
 
     /**
      * @var text $userData
      *
      * @Column(name="user_data", type="text", nullable=false)
      */
-    private $userData;
+    protected $userData;
 
 }

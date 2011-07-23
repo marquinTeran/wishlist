@@ -21,53 +21,53 @@ class User extends BaseModel
 	 * @Column(type="integer", nullable=false)
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @Column(type="string", length=32, unique=true, nullable=false)
 	 */
-	private $username;
+	protected $username;
 
 	/**
 	 * @Column(type="string", length=64, nullable=false)
 	 */
-	private $password;
+	protected $password;
 
 	/**
 	 * @Column(type="string", length=255, unique=true, nullable=false)
 	 */
-	private $email;
+	protected $email;
 
 	/**
 	 * @ManyToOne(targetEntity="Country", inversedBy="users")
 	 * @JoinColumn(name="country_iso", referencedColumnName="iso")
 	 */
-	private $country;
+	protected $country;
 
 	/**
 	 * @Column(type="string", length=2, nullable=false)
 	 */
-	private $language;
+	protected $language;
 
 	/**
 	 * @Column(type="string", length=15, nullable=true)
 	 */
-	private $post_code;
+	protected $post_code;
 
 	/**
 	 * @ManyToOne(targetEntity="UserGroup", inversedBy="users")
 	 */
-	private $user_group;
+	protected $user_group;
 
     /**
      * @OneToMany(targetEntity="Wishlist", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $wishlists;
+    protected $wishlists;
 
 	/**
 	 * @OneToMany(targetEntity="UserSetting", mappedBy="user", cascade={"persist", "remove"})
 	 */
-	private $settings;
+	protected $settings;
 
     /**
      * Constructor

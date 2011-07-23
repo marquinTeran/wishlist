@@ -18,33 +18,33 @@ class Country extends BaseModel
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $iso;
+    protected $iso;
 
     /**
      * @var string $name
      *
      * @Column(name="name", type="string", length=80, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string $printableName
      *
      * @Column(name="printable_name", type="string", length=80, nullable=false)
      */
-    private $printableName;
+    protected $printableName;
 
     /**
      * @var string $iso3
      *
      * @Column(name="iso3", type="string", length=3, nullable=true)
      */
-    private $iso3;
+    protected $iso3;
 
     /**
      * @OneToMany(targetEntity="User", mappedBy="country")
      */
-    private $users;
+    protected $users;
 
     public function __construct()
     {

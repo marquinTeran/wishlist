@@ -18,42 +18,42 @@ class Wishlist extends BaseModel
      * @Id
      * @GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
 	 * @var	string	$name
 	 *
      * @Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
 	 * @var	string	$url_title
 	 *
      * @Column(name="url_title", type="string", length=255, nullable=false)
      */
-    private $url_title;
+    protected $url_title;
 
 	/**
 	 * @var	boolean	$public
 	 *
 	 * @Column(name="public", type="boolean", nullable=false)
 	 */
-	private $public;
+	protected $public;
 
 	/**
 	 * @var	User
 	 *
 	 * @ManyToOne(targetEntity="User", inversedBy="wishlists")
 	 */
-	private $user;
+	protected $user;
 
     /**
 	 * @var	WishlistItem
 	 *
      * @OneToMany(targetEntity="WishlistItem", mappedBy="wishlist", cascade={"persist", "remove"})
      */
-    private $wishlist_items;
+    protected $wishlist_items;
 
     public function __construct()
     {
