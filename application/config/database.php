@@ -40,14 +40,27 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'wishlist';
-$db['default']['password'] = '3NSfcbdy3DEsRsDC';
-$db['default']['database'] = 'wishlist';
-$db['default']['dbdriver'] = 'mysql';
+if (ENVIRONMENT == 'development')
+{
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'wishlist';
+	$db['default']['password'] = '3NSfcbdy3DEsRsDC';
+	$db['default']['database'] = 'wishlist';
+	$db['default']['dbdriver'] = 'mysqli';
+	$db['default']['db_debug'] = TRUE;
+}
+else
+{
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'wishlist';
+	$db['default']['password'] = '';
+	$db['default']['database'] = 'wishlist';
+	$db['default']['dbdriver'] = 'mysqli';
+	$db['default']['db_debug'] = FALSE;
+}
+
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = FALSE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';
