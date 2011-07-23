@@ -13,8 +13,7 @@ class Doctrine {
 		// load database configuration and custom config from CodeIgniter
 		require APPPATH . 'config/database.php';
 
-		// Set up class loading. You could use different autoloaders, provided by your favorite framework,
-		// if you want to.
+		// Set up class loading.
 		require_once APPPATH . 'libraries/Doctrine/Common/ClassLoader.php';
 
 		$doctrineClassLoader = new \Doctrine\Common\ClassLoader('Doctrine', APPPATH . 'libraries');
@@ -39,13 +38,13 @@ class Doctrine {
 		// Set some configuration options
 		$config = new Configuration;
 
+		// Metadata driver
+		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . 'models');	
+		$config->setMetadataDriverImpl($driverImpl);
+
 		// Caching
 		$config->setMetadataCacheImpl($cache);
 		$config->setQueryCacheImpl($cache);
-
-		// Metadata driver
-		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . 'models');
-		$config->setMetadataDriverImpl($driverImpl);
 
 		// Proxies
 		$config->setProxyDir(APPPATH . 'models/Proxies');
