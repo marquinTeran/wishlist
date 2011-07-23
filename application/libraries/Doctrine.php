@@ -49,7 +49,12 @@ class Doctrine {
 		// Proxies
 		$config->setProxyDir(APPPATH . 'models/Proxies');
 		$config->setProxyNamespace('Proxies');
-		$config->setAutoGenerateProxyClasses(TRUE);
+
+		if (ENVIRONMENT == 'development') {
+			$config->setAutoGenerateProxyClasses(TRUE);
+		} else {
+			$config->setAutoGenerateProxyClasses(FALSE);
+		}
 
 		// SQL query logger
 		if (DEBUGGING)
