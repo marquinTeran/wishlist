@@ -40,15 +40,14 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-global $db;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'wishlist';
-$db['default']['password'] = 'seSw4Zb45sfjXrTF';
+$db['default']['password'] = '3NSfcbdy3DEsRsDC';
 $db['default']['database'] = 'wishlist';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
+$db['default']['pconnect'] = FALSE;
+$db['default']['db_debug'] = FALSE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';
