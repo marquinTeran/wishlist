@@ -12,6 +12,8 @@ namespace models;
 class Wishlist extends BaseModel
 {
     /**
+	 * @var	integer	$id
+	 *
      * @Column(name="id", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="AUTO")
@@ -19,26 +21,36 @@ class Wishlist extends BaseModel
     private $id;
 
     /**
+	 * @var	string	$name
+	 *
      * @Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
+	 * @var	string	$url_title
+	 *
      * @Column(name="url_title", type="string", length=255, nullable=false)
      */
     private $url_title;
 
 	/**
+	 * @var	boolean	$public
+	 *
 	 * @Column(name="public", type="boolean", nullable=false)
 	 */
 	private $public;
 
 	/**
+	 * @var	User
+	 *
 	 * @ManyToOne(targetEntity="User", inversedBy="wishlists")
 	 */
 	private $user;
 
     /**
+	 * @var	WishlistItem
+	 *
      * @OneToMany(targetEntity="WishlistItem", mappedBy="wishlist", cascade={"persist", "remove"})
      */
     private $wishlist_items;
