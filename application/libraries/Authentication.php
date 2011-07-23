@@ -76,9 +76,11 @@ class Authentication {
 		$this->user_id = $user->getId();
 		$this->logged_in = TRUE;
 
-		$this->CI->session->set_userdata('user', serialize($this->user));
-		$this->CI->session->set_userdata('logged_in', $this->logged_in);
-		$this->CI->session->set_userdata('user_id', $this->user_id);
+		$this->CI->session->set_userdata(array(
+		 	'user' => serialize($this->user),
+		 	'logged_in' => $this->logged_in,
+		 	'user_id' => $this->user_id
+		));
 	}
 
 	/**
@@ -143,9 +145,11 @@ class Authentication {
 		$this->user_id = NULL;
 		$this->logged_in = NULL;
 
-		$this->CI->session->unset_userdata('user');
-		$this->CI->session->unset_userdata('logged_in');
-		$this->CI->session->unset_userdata('user_id');
+		$this->CI->session->unset_userdata(array(
+	   		'user',
+	   		'logged_in',
+	   		'user_id'
+		));
 	}
 
 	/**
