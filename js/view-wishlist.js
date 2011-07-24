@@ -3,10 +3,11 @@ $('#add-wishlist-item-form').submit(function(e) {
 
     $.post($(this).attr('action'), $(this).serialize(), function(data) {
         if (data.status == 'success') {
+			$('#wishlist-items .empty-wishlist').remove();
 			var new_item = $(data.new_item_html);
-            $('#item-name').val('');
 			new_item.appendTo($('#wishlist-items')).fadeIn(FADE_SPEED);
-        }
+			$('#item-name').val('');
+		}
     }, 'json');
 });
 

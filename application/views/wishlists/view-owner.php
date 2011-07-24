@@ -21,6 +21,6 @@
 	<?php if ( ! empty($wishlist_items)): ?>
 		<?=implode('', $wishlist_items)?>
 	<?php else: ?>
-		<li>There are no items in this wish list.</li>
+		<li class="empty-wishlist">This wish list is empty!</li>
 	<?php endif; ?>
 </ul>
