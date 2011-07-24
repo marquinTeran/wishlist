@@ -2,7 +2,7 @@
 
 define('APPPATH', dirname(__FILE__) . '/');
 define('BASEPATH', APPPATH . '/../system/');
-define('ENVIRONMENT', 'production');
+define('ENVIRONMENT', 'development');
 
 chdir(APPPATH . '/libraries');
 
