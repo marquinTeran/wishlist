@@ -5,7 +5,7 @@ namespace models;
 /**
  * Country
  *
- * @Entity(repositoryClass="models\CountryRepository")
+ * @Entity(repositoryClass="models\CountryRepository", readOnly=true)
  * @Table(name="country")
  * @author Joseph Wynn
  */
