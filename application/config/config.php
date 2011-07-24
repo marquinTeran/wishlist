@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= "http://{$_SERVER['HTTP_HOST']}/";
+$config['base_url']	= (isset($_SERVER['HTTP_HOST'])) ? "http://{$_SERVER['HTTP_HOST']}/" : '';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ $config['index_page'] = '';
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= 'PATH_INFO';
+$config['uri_protocol']	= 'AUTO';
 
 /*
 |--------------------------------------------------------------------------
