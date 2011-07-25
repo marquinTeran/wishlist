@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="user")
  * @author Joseph Wynn
  */
-class User extends BaseModel
+class User extends TimestampedModel
 {
 	/**
 	 * The User currently logged in

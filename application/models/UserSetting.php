@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="user_setting")
  * @author Joseph Wynn
  */
-class UserSetting extends BaseModel
+class UserSetting extends TimestampedModel
 {
 	/**
 	 * @Id

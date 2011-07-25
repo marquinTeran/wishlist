@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="wishlist_item")
  * @author Joseph Wynn
  */
-class WishlistItem extends BaseModel
+class WishlistItem extends TimestampedModel
 {
     /**
      * @Column(name="id", type="integer", nullable=false)

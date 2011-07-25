@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="wishlist")
  * @author Joseph Wynn
  */
-class Wishlist extends BaseModel
+class Wishlist extends TimestampedModel
 {
     /**
 	 * @var	integer	$id

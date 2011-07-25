@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="popular_product")
  * @Entity
  */
-class PopularProduct
+class PopularProduct extends TimestampedModel
 {
 	/**
 	 * @var	integer	$id

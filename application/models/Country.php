@@ -9,7 +9,7 @@ namespace models;
  * @Table(name="country")
  * @author Joseph Wynn
  */
-class Country extends BaseModel
+class Country
 {
     /**
      * @var string $iso
