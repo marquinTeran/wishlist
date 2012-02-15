@@ -29,10 +29,13 @@ class Doctrine {
 		$symfonyClassLoader->register();
 
 		// Choose caching method based on application mode
-		if (ENVIRONMENT == 'development') {
-			$cache = new \Doctrine\Common\Cache\ArrayCache;
-		} else {
+		if (ENVIRONMENT == 'production')
+		{
 			$cache = new \Doctrine\Common\Cache\ApcCache;
+		}
+		else
+		{
+			$cache = new \Doctrine\Common\Cache\ArrayCache;
 		}
 
 		// Set some configuration options
