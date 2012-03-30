@@ -4,17 +4,17 @@ define('APPPATH', dirname(__FILE__) . '/');
 define('BASEPATH', APPPATH . '/../system/');
 define('ENVIRONMENT', 'development');
 
-chdir(APPPATH . '/libraries');
+chdir(APPPATH);
 
-require_once 'Doctrine/Common/ClassLoader.php';
+require_once 'libraries/Doctrine/Common/ClassLoader.php';
 
-$classLoader = new \Doctrine\Common\ClassLoader('Doctrine');
+$classLoader = new \Doctrine\Common\ClassLoader('Doctrine', 'libraries');
 $classLoader->register();
 
-$classLoader = new \Doctrine\Common\ClassLoader('Symfony', 'Doctrine');
+$classLoader = new \Doctrine\Common\ClassLoader('Symfony', 'libraries/Doctrine');
 $classLoader->register();
 
-$configFile = getcwd() . '/Doctrine.php';
+$configFile = getcwd() . '/libraries/Doctrine.php';
 
 $helperSet = null;
 if (file_exists($configFile)) {
