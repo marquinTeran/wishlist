@@ -106,16 +106,11 @@ class ProxyFactory
      * Generate the Proxy file name
      *
      * @param string $className
-     * @param string $baseDir Optional base directory for proxy file name generation.
-     *                        If not specified, the directory configured on the Configuration of the
-     *                        EntityManager will be used by this factory.
      * @return string
      */
-    private function getProxyFileName($className, $baseDir = null)
+    private function getProxyFileName($className)
     {
-        $proxyDir = $baseDir ?: $this->_proxyDir;
-
-        return $proxyDir . DIRECTORY_SEPARATOR . '__CG__' . str_replace('\\', '', $className) . '.php';
+        return $this->_proxyDir . DIRECTORY_SEPARATOR . '__CG__' . str_replace('\\', '', $className) . '.php';
     }
 
     /**
@@ -129,16 +124,14 @@ class ProxyFactory
     public function generateProxyClasses(array $classes, $toDir = null)
     {
         $proxyDir = $toDir ?: $this->_proxyDir;
-        $proxyDir = rtrim($proxyDir, DIRECTORY_SEPARATOR);
-
+        $proxyDir = rtrim($proxyDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         foreach ($classes as $class) {
             /* @var $class ClassMetadata */
             if ($class->isMappedSuperclass) {
                 continue;
             }
 
-            $proxyFileName = $this->getProxyFileName($class->name, $proxyDir);
-
+            $proxyFileName = $this->getProxyFileName($class->name);
             $this->_generateProxyClass($class, $proxyFileName, self::$_proxyClassTemplate);
         }
     }
@@ -282,7 +275,7 @@ class ProxyFactory
         );
 
         if ($cheapCheck) {
-            $code = file($method->getDeclaringClass()->getFileName());
+            $code = file($class->reflClass->getFileName());
             $code = trim(implode(" ", array_slice($code, $method->getStartLine() - 1, $method->getEndLine() - $method->getStartLine() + 1)));
 
             $pattern = sprintf(self::PATTERN_MATCH_ID_METHOD, $method->getName(), $identifier);

@@ -142,7 +142,8 @@ class AnnotationDriver implements Driver
 
         $classAnnotations = $this->_reader->getClassAnnotations($class);
 
-        if ($classAnnotations && is_numeric(key($classAnnotations))) {
+        // Compatibility with Doctrine Common 3.x
+        if ($classAnnotations && is_int(key($classAnnotations))) {
             foreach ($classAnnotations as $annot) {
                 $classAnnotations[get_class($annot)] = $annot;
             }
@@ -175,25 +176,17 @@ class AnnotationDriver implements Driver
 
             if ($tableAnnot->indexes !== null) {
                 foreach ($tableAnnot->indexes as $indexAnnot) {
-                    $index = array('columns' => $indexAnnot->columns);
-
-                    if ( ! empty($indexAnnot->name)) {
-                        $primaryTable['indexes'][$indexAnnot->name] = $index;
-                    } else {
-                        $primaryTable['indexes'][] = $index;
-                    }
+                    $primaryTable['indexes'][$indexAnnot->name] = array(
+                        'columns' => $indexAnnot->columns
+                    );
                 }
             }
 
             if ($tableAnnot->uniqueConstraints !== null) {
-                foreach ($tableAnnot->uniqueConstraints as $uniqueConstraintAnnot) {
-                    $uniqueConstraint = array('columns' => $uniqueConstraintAnnot->columns);
-
-                    if ( ! empty($uniqueConstraintAnnot->name)) {
-                        $primaryTable['uniqueConstraints'][$uniqueConstraintAnnot->name] = $uniqueConstraint;
-                    } else {
-                        $primaryTable['uniqueConstraints'][] = $uniqueConstraint;
-                    }
+                foreach ($tableAnnot->uniqueConstraints as $uniqueConstraint) {
+                    $primaryTable['uniqueConstraints'][$uniqueConstraint->name] = array(
+                        'columns' => $uniqueConstraint->columns
+                    );
                 }
             }
 
@@ -414,7 +407,6 @@ class AnnotationDriver implements Driver
                 $mapping['inversedBy'] = $manyToManyAnnot->inversedBy;
                 $mapping['cascade'] = $manyToManyAnnot->cascade;
                 $mapping['indexBy'] = $manyToManyAnnot->indexBy;
-                $mapping['orphanRemoval'] = $manyToManyAnnot->orphanRemoval;
                 $mapping['fetch'] = $this->getFetchMode($className, $manyToManyAnnot->fetch);
 
                 if ($orderByAnnot = $this->_reader->getPropertyAnnotation($property, 'Doctrine\ORM\Mapping\OrderBy')) {
@@ -432,7 +424,8 @@ class AnnotationDriver implements Driver
                 if ($method->isPublic() && $method->getDeclaringClass()->getName() == $class->name) {
                     $annotations = $this->_reader->getMethodAnnotations($method);
 
-                    if ($annotations && is_numeric(key($annotations))) {
+                    // Compatibility with Doctrine Common 3.x
+                    if ($annotations && is_int(key($annotations))) {
                         foreach ($annotations as $annot) {
                             $annotations[get_class($annot)] = $annot;
                         }
@@ -487,7 +480,8 @@ class AnnotationDriver implements Driver
     {
         $classAnnotations = $this->_reader->getClassAnnotations(new \ReflectionClass($className));
 
-        if ($classAnnotations && is_numeric(key($classAnnotations))) {
+        // Compatibility with Doctrine Common 3.x
+        if ($classAnnotations && is_int(key($classAnnotations))) {
             foreach ($classAnnotations as $annot) {
                 if ($annot instanceof \Doctrine\ORM\Mapping\Entity) {
                     return false;

@@ -106,11 +106,6 @@ class SchemaValidator
 
             $targetMetadata = $cmf->getMetadataFor($assoc['targetEntity']);
 
-            if (isset($assoc['id']) && $targetMetadata->containsForeignIdentifier) {
-                $ce[] = "Cannot map association '" . $class->name. "#". $fieldName ." as identifier, because " .
-                        "the target entity '". $targetMetadata->name . "' also maps an association as identifier.";
-            }
-
             /* @var $assoc AssociationMapping */
             if ($assoc['mappedBy']) {
                 if ($targetMetadata->hasField($assoc['mappedBy'])) {

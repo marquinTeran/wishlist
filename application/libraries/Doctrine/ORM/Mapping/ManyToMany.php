@@ -35,8 +35,6 @@ final class ManyToMany implements Annotation
     public $cascade;
     /** @var string */
     public $fetch = 'LAZY';
-    /** @var boolean */
-    public $orphanRemoval = false;
     /** @var string */
     public $indexBy;
 }

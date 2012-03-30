@@ -698,6 +698,16 @@ class BasicEntityPersister
 
         $hydrator = $this->_em->newHydrator(Query::HYDRATE_OBJECT);
         $hydrator->hydrateAll($stmt, $this->_rsm, array(Query::HINT_REFRESH => true));
+
+        if (isset($this->_class->lifecycleCallbacks[Events::postLoad])) {
+            $this->_class->invokeLifecycleCallbacks(Events::postLoad, $entity);
+        }
+
+        $evm = $this->_em->getEventManager();
+
+        if ($evm->hasListeners(Events::postLoad)) {
+            $evm->dispatchEvent(Events::postLoad, new LifecycleEventArgs($entity, $this->_em));
+        }
     }
 
     /**

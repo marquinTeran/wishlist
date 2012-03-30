@@ -37,10 +37,14 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$route['default_controller'] = 'about';
+$route['404_override'] = 'error/error_404';
 
-$route['default_controller'] = "welcome";
-$route['404_override'] = '';
+// Language Routes
+$route['set-language/(\w{2}).*'] = 'set-language/index/$1';
 
+// Wishlist Routes
+$route['wishlists/(:num)'] = 'wishlists/view/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
