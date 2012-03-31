@@ -35,7 +35,6 @@ class Account extends WL_Controller {
 		$this->form_validation->set_rules('email', lang('field_email'), 'required|valid_email|callback__unique_email');
 		$this->form_validation->set_rules('country', lang('field_country'), 'callback__valid_country');
 		$this->form_validation->set_rules('language', lang('field_language'), 'callback__valid_language');
-		$this->form_validation->set_rules('post_code', lang('field_post_code'), 'max_length[15]');
 
 		if ($this->form_validation->run())
 		{
@@ -163,7 +162,6 @@ class Account extends WL_Controller {
 		$this->form_validation->set_rules('password', lang('field_password'), 'required|min_length[6]|matches[password_confirm]');
 		$this->form_validation->set_rules('email', lang('field_email'), 'required|valid_email|callback__unique_email');
 		$this->form_validation->set_rules('country', lang('field_country'), 'callback__valid_country');
-		$this->form_validation->set_rules('post_code', lang('field_post_code'), 'max_length[15]');
 		$this->form_validation->set_message('matches', lang('validation_matches'));
 
 		if ($this->form_validation->run() === FALSE)
@@ -183,7 +181,6 @@ class Account extends WL_Controller {
 			$user->setUsername($this->input->post('username'));
 			$user->setPassword($this->input->post('password'));
 			$user->setEmail($this->input->post('email'));
-			$user->setPostCode($this->input->post('post_code'));
 
 			// Set the user's language
 			$language_cookie = $this->input->cookie($this->config->item('language_cookie'));

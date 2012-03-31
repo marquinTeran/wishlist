@@ -34,7 +34,7 @@ class User extends TimestampedModel
 	protected $password;
 
 	/**
-	 * @Column(type="string", length=255, unique=true, nullable=false)
+	 * @Column(type="string", length=190, unique=true, nullable=false)
 	 */
 	protected $email;
 
@@ -48,11 +48,6 @@ class User extends TimestampedModel
 	 * @Column(type="string", length=2, nullable=false)
 	 */
 	protected $language;
-
-	/**
-	 * @Column(type="string", length=15, nullable=true)
-	 */
-	protected $post_code;
 
 	/**
 	 * @ManyToOne(targetEntity="UserGroup", inversedBy="users")
@@ -104,7 +99,7 @@ class User extends TimestampedModel
 	public static function encryptPassword($password)
 	{
         $CI =& get_instance();
-        
+
 		$salt = $CI->config->item('encryption_key');
 		$encrypted_password = sha1($password . $salt);
 
@@ -192,28 +187,6 @@ class User extends TimestampedModel
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * Set post_code
-     *
-     * @param	string 	$post_code
-     * @return	models\User
-     */
-    public function setPostCode($post_code)
-    {
-        $this->post_code = $post_code;
-        return $this;
-    }
-
-    /**
-     * Get post_code
-     *
-     * @return	string $post_code
-     */
-    public function getPostCode()
-    {
-        return $this->post_code;
     }
 
     /**
