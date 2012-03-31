@@ -42,7 +42,7 @@ class Doctrine {
 		$config = new Configuration;
 
 		// Metadata driver
-		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . 'models');	
+		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . 'models');
 		$config->setMetadataDriverImpl($driverImpl);
 
 		// Caching
@@ -68,11 +68,15 @@ class Doctrine {
 
 		// Database connection information
 		$connectionOptions = array(
-			'driver' => 'pdo_mysql',
-			'user' => $db['default']['username'],
-			'password' => $db['default']['password'],
-			'host' => $db['default']['hostname'],
-			'dbname' => $db['default']['database']
+			'driver'		=> 'pdo_mysql',
+			'user'			=> $db['default']['username'],
+			'password'		=> $db['default']['password'],
+			'host'			=> $db['default']['hostname'],
+			'dbname'		=> $db['default']['database'],
+			'charset'		=> $db['default']['char_set'],
+			'driverOptions'	=> array(
+				'charset' 	=> $db['default']['char_set']
+			)
 		);
 
 		// Create EntityManager
