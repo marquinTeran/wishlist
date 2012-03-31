@@ -44,7 +44,7 @@ if (ENVIRONMENT == 'development')
 {
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'wishlist';
-	$db['default']['password'] = '3NSfcbdy3DEsRsDC';
+	$db['default']['password'] = '';
 	$db['default']['database'] = 'wishlist';
 	$db['default']['dbdriver'] = 'mysqli';
 	$db['default']['db_debug'] = TRUE;
