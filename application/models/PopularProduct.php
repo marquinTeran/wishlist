@@ -13,7 +13,7 @@ class PopularProduct extends TimestampedModel
 {
 	/**
 	 * @var	integer	$id
-	 * 
+	 *
 	 * @Id
 	 * @Column(type="integer", nullable=false)
 	 * @GeneratedValue(strategy="AUTO")
@@ -23,7 +23,7 @@ class PopularProduct extends TimestampedModel
     /**
      * @var string $title
      *
-     * @Column(name="title", type="string", length=255, nullable=false, unique=true)
+     * @Column(name="title", type="string", length=127, nullable=false, unique=true)
      */
     protected $title;
 
